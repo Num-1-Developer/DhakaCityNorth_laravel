@@ -32,3 +32,8 @@ Route::get('/ps_update_page/{id}', [PS_controler::class,'update_page']);
 
 Route::get('/add_word_info', [w_controler::class,'show']);
 Route::get('/w_ajax/{id}', [w_controler::class,'ajax']);
+Route::get('insert_word_info', [w_controler::class,'insert']);
+
+Route::get('/add_unit_info', [u_controler::class,'show']);
+Route::get('/u_ajax/{id}', [u_controler::class,'ajax']);
+Route::get('insert_unit_info', [u_controler::class,'insert']);

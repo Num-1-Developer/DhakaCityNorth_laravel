@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\words;
 use App\Models\police_stations;
 use App\Models\parlament_seat;
+use App\Models\u_model;
 
-class w_controler extends Controller
+class u_controler extends Controller
 {
     function show(){
         
