@@ -11,26 +11,21 @@
       <div class="page-breadcrumb">
           <div class="row">
               <div class="col-5 align-self-center">
-                  <h4 class="page-title">Add Parlament</h4>
+                  <h4 class="page-title">Add Designation information</h4>
               </div>
-            @if(session()->has('message'))
-                @if(session()->get('message')=='0')
-                    <div class="alert alert-danger">
-                        <p>You value already existed (Insert Failed)</p>
-        
-                    </div>
-                @elseif(session()->get('message')=='4')
-                    <div class="alert alert-success">
-                        <p>Delete Success</p>
-        
-                    </div>
-                @else
-                    <div class="alert alert-success">
-                        <p>Insert Success</p>
-        
-                    </div>
-                @endif
-            @endif
+              @if(session()->has('message'))
+              @if(session()->get('message')=='0')
+                  <div class="alert alert-danger">
+                      <p>You value already existed (Insert Failed)</p>
+      
+                  </div>
+              @else
+                  <div class="alert alert-success">
+                      <p>Insert Success</p>
+      
+                  </div>
+              @endif
+          @endif
               <div class="col-7 align-self-center">
                   <div class="d-flex align-items-center justify-content-end">
                       <nav aria-label="breadcrumb">
@@ -38,7 +33,7 @@
                               <li class="breadcrumb-item">
                                   <a href="#">Home</a>
                               </li>
-                              <li class="breadcrumb-item active" aria-current="page">Add Parlament Information</li>
+                              <li class="breadcrumb-item active" aria-current="page">Add Designation Information</li>
                           </ol>
                       </nav>
                   </div>
@@ -53,34 +48,30 @@
       <!-- ============================================================== -->
       <div class="container-fluid">
 
+
           <!-- ============================================================== -->
           <!-- Add Police Station -->
           <div class="col-12  w-75 m-auto">
               <div class="card">
                   <div class="card-body">
                       <!-- <h2 class="card-title text-center" style="text-transform: uppercase;">Add Police Station</h2>-->
-                      <form action='insert_parlament' method="POST" class="form-horizontal form-material mx-2">
+                      <form action='insert_designation_info' method="POST" class="form-horizontal form-material mx-2">
                         @csrf
                       <div class="form-group d-flex">
-                        
-                              <label class="col-sm-12" style="width: 25%;">Add Parlament</label>
+                              <label class="col-sm-12" style="width: 25%;">Designation Name</label>
                               <div class="col-sm-12" style="width: 75%;">
-                                  <select name='name' class="form-select shadow-none form-control-line">
-                                      <option value="Dhaka">Dhaka</option>  
+                                  <select name='d_name' class="form-select shadow-none form-control-line">
+                                      <option value="Presindent">Select Designatin Name</option>  
+                                      <option value="Presindent">President</option>  
+                                      <option value="Secreatry">Secreatry</option>  
                                   </select>
-                              </div>
-                          </div>
-                          <div class="form-group d-flex">
-                              <label class="col-sm-12" style="width: 25%;"> Number</label>
-                              <div class="col-sm-12" style="width: 75%;">
-                                  <input name='no' type="number" placeholder="Number" class="form-control form-control-line">
                               </div>
                           </div>
                          
                           <div class="form-group d-flex">
                               <div class="col-sm-12" style="width: 25%;"></div>
                               <div class="col-sm-12" style="width: 75%;">
-                                  <button class="btn btn-success text-white">Submit</button>
+                                  <button class="btn btn-success text-white">Submit</button> 
                               </div>
                           </div>
                           
@@ -105,7 +96,7 @@
                               <thead>
                                   <tr>
                                       <th class="border-top-0 text-center">SL</th>
-                                      <th class="border-top-0 text-center">Parlament</th>
+                                      <th class="border-top-0 text-center">Designation Name</th>
                                       <th class="border-top-0 text-center">Action</th>
                                   </tr>
                               </thead>
@@ -115,13 +106,14 @@
                                   <!--  -->
                                       <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$loop->index+1}}
                                       </td>
-                                      <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->name.'-'.$data->no}}</td>
-                                      <td class='td_css' style='line-height: 0.5;padding: .5rem;text-align: center'>
-                                      <a  href='/parlament_update_page/{{$data->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'><i class="bi bi-pen"></i></a>
-                                      <form class="spacing" method="POST" action='/delete/parlament_seat/{{$data->id}}' >
+                                      <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->d_name}}</td>
+                                      <td class="td_css" style='line-height: 0.5;padding: .5rem;text-align: center'>
+                                            <td class="td_css" style='line-height: 0.5;padding: .5rem;text-align: center'>
+                                      <a   href='/parlament_update_page/{{$data->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'><i class="bi bi-pen"></i></a>
+                                      <form class="spacing" method="POST" action='/delete/designation/{{$data->id}}'>
                                         @csrf
-                                                @method('delete')
-                                                <button id='custom-btn' class="btn btn-danger"> <i class="bi bi-trash"></i> </button>
+                                        @method('delete')
+                                        <button id="custom-btn" class="btn btn-danger"> <i class="bi bi-trash"></i> </button>
                                      </form>
                                   </td>
                                   

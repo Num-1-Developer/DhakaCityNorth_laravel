@@ -1,0 +1,41 @@
+.td_css {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    line-height: 0.5;
+    padding: 0 !important;
+}
+td #custom-btn {
+    height: 20px;
+    width: 20px;
+    padding: 0;
+    background: none;
+    border: none;
+}
+td .spacing {
+    margin-left: 10px;
+}
+td {
+    padding: 0.5rem;
+    text-align: center;
+    padding: 0;
+    line-height: unset;
+}
+td a {
+    padding: 0.5rem;
+    background: none !important;
+    height: 20px;
+    width: 20px;
+    border: none !important;
+    line-height: 20px !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+td #custom-btn i {
+    color: red;
+}
+td a i {
+    color: lime;
+}

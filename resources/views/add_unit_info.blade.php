@@ -54,12 +54,12 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- <h2 class="card-title text-center" style="text-transform: uppercase;">Add Police Station</h2>-->
-                            <form action="/insert_word_info" class="form-horizontal form-material mx-2">
+                            <form action="/insert_unit_info" class="form-horizontal form-material mx-2">
                                 <div class="form-group d-flex">
                                     <label class="col-sm-12" style="width: 25%;">Add Parlament</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="p_id" name="p_id" class="form-select shadow-none form-control-line" onchange="data_fetch()">
-                                            <option value="">Select Parlament</option>
+                                            <option>Select Parlament</option>
                                             @foreach($data_p as $value)
                                         <option value="{{$value->id}}">{{$value->name.'-'.$value->no}}</option>
                                         @endforeach
@@ -69,16 +69,26 @@
                                 <div class="form-group d-flex">
                                     <label class="col-sm-12" style="width: 25%;">Add P/S</label>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <select id="ps_id" name="ps_id" class="form-select shadow-none form-control-line" onchange="getid()">
-                                            <option value="">Select P/S</option>
+                                        <select id="ps_id" name="ps_id" class="form-select shadow-none form-control-line" onchange="ps_func()">
+                                            <option>Select P/S</option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group d-flex">
+                                    <label class="col-sm-12" style="width: 25%;">Add Word</label>
+                                    <div class="col-sm-12" style="width: 75%;">
+                                        <select id="w_id" name="w_id" class="form-select shadow-none form-control-line">
+                                            <option>Select word</option>
                                             
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;"> Word Number</label>
+                                    <label class="col-sm-12" style="width: 25%;"> Union Name</label>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <input name='w_number' type="text" placeholder="Insert Word Number" class="form-control form-control-line">
+                                        <input name='union_name' type="text" placeholder="Insert Union Name" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
@@ -104,6 +114,7 @@
                                             <th class="border-top-0 text-center">Parlament</th>
                                             <th class="border-top-0 text-center">Polish Station Name</th>
                                             <th class="border-top-0 text-center">Word Number</th>
+                                            <th class="border-top-0 text-center">Union Name</th>
                                             <th class="border-top-0 text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -116,9 +127,10 @@
                                             <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->name.'-'.$data->no}}</td>
                                             <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->PS_name}}</td>
                                             <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->w_number}}</td>
+                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->union_name}}</td>
                                             <td class="td_css" style='line-height: 0.5;padding: .5rem;text-align: center'>
                                             <a  href='/ps_update_page/{{$data->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'><i class="bi bi-pen"></i></a>
-                                            <form class="spacing" method="POST" action='/delete/words/{{$data->id}}'>
+                                            <form class="spacing" method="POST" action='/delete/u_model/{{$data->id}}'>
                                                 @csrf
                                                 @method('delete')
                                                 <button id='custom-btn' class="btn btn-danger"> <i class="bi bi-trash"></i> </button>
@@ -165,9 +177,9 @@
                     dataType: 'json',
                     url: "/ps_ajax/"+p_id,
                     success:function(respose){
-                        console.log(respose);
-                        var data = '<option value="">Select P/S</option>';
+                        var data = '<option>Select P/S</option>';
                         $.each(respose,function(key,value){
+
                             data = data + '<option value="'+value.id+'">'+value.PS_name+'</option>';
                             
                         });
@@ -176,11 +188,25 @@
                 });
                     
             }
-    function getid()
-            { 
+
+
+            function ps_func(){
+
                 var ps_id =  $('#ps_id').val();
-               console.log(ps_id);
-                    
+                $.ajax({
+                    type: "GET",
+                    dataType: 'json',
+                    url: "/w_ajax/"+ps_id,
+                    success:function(respose){
+                        var data = '<option>Select Word</option>';
+                        $.each(respose,function(key,value){
+
+                            data = data + '<option value="'+value.id+'">'+value.w_number+'</option>';
+                            
+                        });
+                        $('#w_id').html(data);
+                    }
+                });
             }
         </script>
 @endsection

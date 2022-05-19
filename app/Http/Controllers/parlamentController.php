@@ -8,17 +8,32 @@ use App\Models\parlament_seat;
 
 class parlamentController extends Controller
 {
-    function insert(request $request){
-        $insert = new parlament_seat;
-        $insert->name= $request->name ;
-        $insert->no= $request->no;
-        $insert->save();
-        return redirect('/add_parlament_info');
+
+function validation(){
+    return view('add_parlament_info');
+}
+
+function insert(request $request){
+  $user = parlament_seat::where('no', '=', $request->input('no'))->first();
+if ($user ===null) {
+    $insert = new parlament_seat;
+    $insert->name= $request->name ;
+    $insert->no= $request->no;
+    $insert->save();
+    // echo "<script> alert('done'); </script>";
+    return redirect('/add_parlament_info')->with('message', '1');
+}else{
+  $msg= 'This value is exist';
+    return redirect('/add_parlament_info')->with('message', '0');
+
+}
+       
+       
     }
     function show(){
       
          $data_fetch = parlament_seat::orderBY('id','desc')->get();
-         return view('add_parlament_info',['data'=>$data_fetch]);
+         return view('add_parlament_info',['data'=>$data_fetch,"data_noti"=>'yes']);
     }
    
     public function update_page($id){

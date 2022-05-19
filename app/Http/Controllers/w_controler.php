@@ -17,7 +17,7 @@ class w_controler extends Controller
        $data_join = DB::table('words')
                     ->join('parlament_seat','words.P_id','=','parlament_seat.id')
                     ->join('police_stations','words.ps_id','=','police_stations.id')
-                    ->select('words.*','police_stations.*','parlament_seat.*')
+                    ->select('words.*','police_stations.PS_name','parlament_seat.name','parlament_seat.no')
                     ->orderBy('words.id','desc')
                     ->get();
                     // dd($data_p);
@@ -38,11 +38,82 @@ class w_controler extends Controller
 
     }
     function insert(request $request){
-        $insert = new words;
-        $insert->p_id = $request->p_id;
-        $insert->ps_id= $request->ps_id;
-        $insert->w_number= $request->w_number;
-        $insert->save();
-        return redirect('/add_word_info');
+
+        $ps = words::where('ps_id', '=', $request->input('ps_id'))->first();
+
+        // $insert = new words;
+        // $insert->p_id = $request->p_id;
+        // $insert->ps_id= $request->ps_id;
+        // $insert->w_number= $request->w_number;
+        $a = $request->p_id;
+        $b = $request->ps_id;
+        $c = $request->w_number;
+        $combine = $a.$b.$c;
+        $ps = words::all();
+        foreach($ps as $data){
+            $search='';
+            $com = $data->p_id.$data->ps_id.$data->w_number;
+            if($combine==$com){
+                $search=$com;
+
+            }else{
+               
+                
+            }
+        }
+        if($search==$combine){
+            return redirect('/add_word_info')->with('message', '0');
+        }
+        else{
+            $insert = new words;
+            $insert->p_id = $request->p_id;
+            $insert->ps_id= $request->ps_id;
+            $insert->w_number= $request->w_number;
+            $insert->save();
+            return redirect('/add_word_info')->with('message', '1');
+        }
+ 
+        // dump($combine);
+        // dump($ps);
+        //  foreach
+
+        // if ($ps ===null) { 
+            
+        //     $w_number = words::where('w_number', '=', $request->input('w_number'))->first();
+        //     if($w_number===null){
+        //         $insert = new words;
+        //         $insert->p_id = $request->p_id;
+        //         $insert->ps_id= $request->ps_id;
+        //         $insert->w_number= $request->w_number;
+        //         $insert->save();
+        //         return redirect('/add_word_info')->with('message', '1');
+        //     }else{
+        //         $insert = new words;
+        //         $insert->p_id = $request->p_id;
+        //         $insert->ps_id= $request->ps_id;
+        //         $insert->w_number= $request->w_number;
+        //         $insert->save();
+        //         return redirect('/add_word_info')->with('message', '1');
+        //     }
+           
+        // }
+        
+        // else{
+        //     $w_number = words::where('w_number', '=', $request->input('w_number'))->first();
+        //  if($w_number===null){
+        //     $insert = new words;
+        //     $insert->p_id = $request->p_id;
+        //     $insert->ps_id= $request->ps_id;
+        //     $insert->w_number= $request->w_number;
+        //     $insert->save();
+        //     return redirect('/add_word_info')->with('message', '1');
+        //  }else{
+        //     return redirect('/add_word_info')->with('message', '0');
+        //  }
+        
+        // }
+
+        
+       
     }
 }

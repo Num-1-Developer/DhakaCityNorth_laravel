@@ -9,6 +9,19 @@
             <div class="col-5 align-self-center">
                 <h4 class="page-title">Add Parlament Information</h4>
             </div>
+            @if(session()->has('message'))
+            @if(session()->get('message')=='0')
+                <div class="alert alert-danger">
+                    <p>You value already existed (Insert Failed)</p>
+    
+                </div>
+            @else
+                <div class="alert alert-success">
+                    <p>Insert Success</p>
+    
+                </div>
+            @endif
+        @endif
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
                     <nav aria-label="breadcrumb">

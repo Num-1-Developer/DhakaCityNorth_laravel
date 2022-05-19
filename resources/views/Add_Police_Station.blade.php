@@ -12,6 +12,19 @@
                     <div class="col-5 align-self-center">
                         <h4 class="page-title">Add Police Station</h4>
                     </div>
+                    @if(session()->has('message'))
+                    @if(session()->get('message')=='0')
+                        <div class="alert alert-danger">
+                            <p>You value already existed (Insert Failed)</p>
+            
+                        </div>
+                    @else
+                        <div class="alert alert-success">
+                            <p>Insert Success</p>
+            
+                        </div>
+                    @endif
+                @endif
                     <div class="col-7 align-self-center">
                         <div class="d-flex align-items-center justify-content-end">
                             <nav aria-label="breadcrumb">
@@ -49,7 +62,7 @@
                                         <select name='P_id' class="form-select shadow-none form-control-line">
                                             <option value="">Select parlament</option>
                                             @foreach($data_p as $data)
-                                            <option value="{{$data->id}}">{{$data->name}}-{{$data->no}}</option>
+                                            <option value="{{$data->id}}">{{$data->name.'-'.$data->no}}</option>
                                             @endforeach   
                                         </select>
                                     </div>
@@ -93,8 +106,7 @@
                                     <thead>
                                         <tr>
                                             <th class="border-top-0 text-center">SL</th>
-                                            <th class="border-top-0 text-center">Parlament Name</th>
-                                            <th class="border-top-0 text-center">Parlament Number</th>
+                                            <th class="border-top-0 text-center">Parlament</th>
                                             <th class="border-top-0 text-center">Polish Station Name</th>
                                             <th class="border-top-0 text-center">Action</th>
                                         </tr>
@@ -105,12 +117,15 @@
                                         <!--  -->
                                             <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$loop->index+1}}
                                             </td>
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data_ps->PS_name}}</td>
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data_ps->no}}</td>
-                                            <td style='line-height: 0.5;padding: .5rem; text-align: center'>{{$data_ps->name}}</td>
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>
-                                            <a  href='/ps_update_page/{{$data_ps->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'>edit</a>
-                                            <a  href='/ps_delete/{{$data_ps->id}}' name="btn_delete" class="btn btn-danger" style='line-height: 0.5;padding: .5rem'>delete</a>
+                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data_ps->name.'-'.$data_ps->no}}</td>
+                                            <td style='line-height: 0.5;padding: .5rem; text-align: center'>{{$data_ps->PS_name}}</td>
+                                            <td class='td_css' style='line-height: 0.5;padding: .5rem;text-align: center'>
+                                            <a  href='/ps_update_page/{{$data_ps->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'><i class="bi bi-pen"></i></a>
+                                            <form class="spacing" method="POST" action='/delete/police_stations/{{$data_ps->id}}'>
+                                                @csrf
+                                                @method('delete')
+                                                <button id='custom-btn' class="btn btn-danger"> <i class="bi bi-trash"></i></button>
+                                             </form>
                                         </td>
                                         
                                         </tr>
