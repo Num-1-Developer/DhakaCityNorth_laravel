@@ -19,6 +19,8 @@ class PS_controler extends Controller
         return view('Add_Police_Station',compact('data_p','data_ps'));
 
     }
+
+    
     function insert(request $request){
 
         $user = police_stations::where('PS_name', '=', $request->input('PS_name'))->first();
@@ -38,24 +40,19 @@ class PS_controler extends Controller
     
     
     public function update_page($id){
-        $data_p = parlament_seat::orderBY('id','desc')->get();
-        $data = police_stations::where ('id',$id)->first();
-        return view('parlament_update_page',compact('data_p','data'));
+        
+        $data_p = parlament_seat::all();
+        $data_ps = police_stations::where ('id',$id)->first();
+        return view('update_page_ps',compact('data_p','data_ps'));
     }
 
     public function update(request $request,$id){
-        $update = parlament_seat::where('id',$id)->first();
- 
-        $update->name= $request->name ;
-        $update->no= $request->no;
+        $update = police_stations::where('id',$id)->first();
+
+        $update->PS_name = $request->PS_name;
+        $update->P_id= $request->P_id;
         $update->save();
-        return redirect('/add_parlament_info');
+        return redirect('/Add_Police_Station')->with('message', '1');
         
     }
-    // public function delete($id){
-    //     $data = parlament_seat::where('id',$id)->first();
-    //     $data->delete();
-    //     return redirect('/add_parlament_info');
-    //    ;
-    // }
 }

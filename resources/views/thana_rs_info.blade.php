@@ -9,17 +9,27 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-5 align-self-center">
-                    <h4 class="page-title">Add Thana R/P Information</h4>
+                    <h4 class="page-title">থানার দায়িত্বাভার ব্যক্তির তথ্য</h4>
                 </div>
                 @if(session()->has('message'))
                 @if(session()->get('message')=='0')
                     <div class="alert alert-danger">
-                        <p>You value already existed (Insert Failed)</p>
+                        <p>আপনার দেওয়া তথ্য বিদ্যমান আছে</p>
         
                     </div>
-                @else
+                @elseif(session()->get('message')=='4')
                     <div class="alert alert-success">
-                        <p>Insert Success</p>
+                        <p>সফলভাবে ডিলেট হয়েছে</p>
+        
+                    </div>
+                @elseif(session()->get('message')=='1')
+                    <div class="alert alert-success">
+                        <p>সফলভাবে যোগ করা হয়েছে</p>
+        
+                    </div>
+                @elseif(session()->get('message')=='5')
+                    <div class="alert alert-success">
+                        <p>সফলভাবে আপডেট হয়েছে</p>
         
                     </div>
                 @endif
@@ -29,9 +39,9 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="#">Home</a>
+                                    <a href="#">হোম</a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">Add Thana R/P Information</li>
+                                <li class="breadcrumb-item active" aria-current="page">থানার দায়িত্বভার ব্যক্তির তথ্য</li>
                             </ol>
                         </nav>
                     </div>
@@ -54,13 +64,13 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- <h2 class="card-title text-center" style="text-transform: uppercase;">Add Police Station</h2>-->
-                            <form action="/insert_thana_rs_info" method="POST" class="form-horizontal form-material mx-2">
+                            <form action="/insert_thana_rs_info" method="POST" class="form-horizontal form-material mx-2" enctype="multipart/form-data">
                               @csrf
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;"> Parlament</label>
+                                    <label class="col-sm-12" style="width: 25%;"> সংসদ নং</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="p_id" name="p_id" class="form-select shadow-none form-control-line" onchange="data_fetch()">
-                                            <option>Select Parlament</option>
+                                            <option>সিলেক্ট সংসদ নং</option>
                                             @foreach($data_p as $value)
                                         <option value="{{$value->id}}">{{$value->name.'-'.$value->no}}</option>
                                         @endforeach
@@ -68,19 +78,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">Police Station</label>
+                                    <label class="col-sm-12" style="width: 25%;">থানা</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="ps_id" name="ps_id" class="form-select shadow-none form-control-line">
-                                            <option>Select P/S</option>
+                                            <option>সিলেক্ট থানা</option>
                                             
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">Designation</label>
+                                    <label class="col-sm-12" style="width: 25%;">কমিটি</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select name="d_id" class="form-select shadow-none form-control-line">
-                                            <option>Select Designation Name</option>
+                                            <option>সিলেক্ট কমিটি</option>
                                             @foreach($data_designation as $value)
                                         <option value="{{$value->id}}">{{$value->d_name}}</option>
                                         @endforeach
@@ -88,27 +98,49 @@
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;"> R/P Name</label>
+                                    <label class="col-sm-12" style="width: 25%;">নাম</label>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <input name='rp_name' type="text" placeholder="Insert Responsible Person's Name" class="form-control form-control-line">
+                                        <input name='rp_name' type="text" placeholder="নাম" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">  R/P Phone</label>
+                                    <label class="col-sm-12" style="width: 25%;">  মোবাইল নম্বর</label>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <input name='rp_phone' type="number" placeholder="Insert Responsible Person's Phone" class="form-control form-control-line">
+                                        <input name='rp_phone' type="text" placeholder=" মোবাইল নম্বর" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">  R/P NID</label>
+                                    <label class="col-sm-12" style="width: 25%;"> ভোটার নং</label>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <input name='rp_nid' type="number" placeholder="Insert Responsible Person's NID" class="form-control form-control-line">
+                                        <input name='rp_nid' type="text" placeholder="ভোটার নং" class="form-control form-control-line">
                                     </div>
                                 </div>
+
+                                <div class="form-group d-flex">
+                                    <label class="col-sm-12" style="width: 25%;">ই-মেইল</label>
+                                    <div class="col-sm-12" style="width: 75%;">
+                                        <input name='rp_email' type="email" placeholder="ই-মেইল" class="form-control form-control-line">
+                                    </div>
+                                </div>
+        
+                                <div class="form-group d-flex">
+                                    <label class="col-sm-12" style="width: 25%;">জন্ম তারিখ</label>
+                                    <div class="col-sm-12" style="width: 75%;">
+                                        <input name='rp_dob' type="date" lang="bn"  class="form-control form-control-line">
+                                    </div>
+                                </div>
+        
+                                <div class="form-group d-flex">
+                                    <label class="col-sm-12" style="width: 25%;">ছবি</label>
+                                    <div class="col-sm-12" style="width: 75%;">
+                                        <input name='rp_img' type="file" placeholder="ছবি" class="form-control form-control-line">
+                                    </div>
+                                </div>
+
                                 <div class="form-group d-flex">
                                     <div class="col-sm-12" style="width: 25%;"></div>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <button class="btn btn-success text-white">Submit</button>
+                                        <button class="btn btn-success text-white">জমা দিন</button>
                                     </div>
                                 </div>
                             </form>
@@ -121,40 +153,46 @@
                     <div class="col-12  w-75 m-auto">
                         <div class="card">
                             <div class="table-responsive">
-                                <table class="table table-hover table-bordered">
+                                <table id="datatable" class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0 text-center">SL</th>
-                                            <th class="border-top-0 text-center">Parlament</th>
-                                            <th class="border-top-0 text-center">Polish Station Name</th>
-                                            <th class="border-top-0 text-center">Designation Name</th>
-                                            <th class="border-top-0 text-center">P/R Name</th>
-                                            <th class="border-top-0 text-center">P/R Phone</th>
-                                            <th class="border-top-0 text-center">P/R NID</th>
-                                            <th class="border-top-0 text-center">Action</th>
+                                            <th class="border-top-0 text-center">সি. নং</th>
+                                            <th class="border-top-0 text-center">সংসদ নং</th>
+                                            <th class="border-top-0 text-center">থানা</th>
+                                            <th class="border-top-0 text-center">কমিটির নাম</th>
+                                            <th class="border-top-0 text-center">নাম</th>
+                                            <th class="border-top-0 text-center"> ফোন নাম্বার</th>
+                                            <th class="border-top-0 text-center">ভোটার নং</th>
+                                            <th class="border-top-0 text-center">ই-মেইল</th>
+                                            <th class="border-top-0 text-center">জন্ম তারিখ</th>
+                                            <th class="border-top-0 text-center">ওপারেশন</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     
                                     @foreach($data_join as $data)
                                     
-                                        <tr>
+                                        <tr class="tr_n_td">
                                         <!--  -->
                                             
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$loop->index+1}}
+                                            <td>{{$loop->index+1}}
                                             </td>
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->name.'-'.$data->no}}</td>
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->PS_name}}</td>
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->d_name}}</td>
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->rp_name}}</td>
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->rp_phone}}</td>
-                                            <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->rp_nid}}</td>
-                                            <td class="td_css" style='line-height: 0.5;padding: .5rem;text-align: center'>
-                                            <a  href='/ps_update_page/{{$data->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'><i class="bi bi-pen"></i></a>
+                                            <td>{{$data->name.'-'.$data->no}}</td>
+                                            <td>{{$data->PS_name}}</td>
+                                            <td>{{$data->d_name}}</td>
+                                            <td>{{$data->rp_name}}</td>
+                                            <td>{{$data->rp_phone}}</td>
+                                            <td>{{$data->rp_nid}}</td>
+                                            <td>{{$data->rp_email}}</td>
+                                            <td>{{$data->rp_dob}}</td>
+                                            <td class="td_n_img"><img src="{{asset("storage/image/$data->rp_img")}}" alt=""></td>
+                                            
+                                            <td class="td_css">
+                                            <a  href='/update_page_thana_rs/{{$data->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'><i class="bi bi-pen"></i></a>
                                             <form class="spacing" method="POST" action='/delete/policeStationResponsibleParson/{{$data->id}}'>
                                                 @csrf
                                                 @method('delete')
-                                                <button id='custom-btn' class="btn btn-danger"> <i class="bi bi-trash"></i> </button>
+                                                <button id='custom-btn' class="btn btn-danger" onclick="return confirm('Are you sure??')"> <i class="bi bi-trash"></i> </button>
                                              </form>
                                         </td>
                                         
@@ -199,7 +237,7 @@
                     url: "/ps_ajax/"+p_id,
                     success:function(respose){
                         console.log(respose);
-                        var data = '<option>Select P/S</option>';
+                        var data = '<option>সিলেক্ট থানা</option>';
                         $.each(respose,function(key,value){
 
                             data = data + '<option value="'+value.id+'">'+value.PS_name+'</option>';

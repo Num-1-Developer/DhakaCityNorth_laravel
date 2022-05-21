@@ -10,29 +10,39 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">Add M.P Information</h4>
+                <h4 class="page-title">এম পি এর তথ্য যোগ করুন</h4>
             </div>
             @if(session()->has('message'))
-            @if(session()->get('message')=='0')
-                <div class="alert alert-danger">
-                    <p>You value already existed (Insert Failed)</p>
-    
-                </div>
-            @else
-                <div class="alert alert-success">
-                    <p>Insert Success</p>
-    
-                </div>
+                @if(session()->get('message')=='0')
+                    <div class="alert alert-danger">
+                        <p>আপনার দেওয়া তথ্য বিদ্যমান আছে</p>
+        
+                    </div>
+                @elseif(session()->get('message')=='4')
+                    <div class="alert alert-success">
+                        <p>সফলভাবে ডিলেট হয়েছে</p>
+        
+                    </div>
+                @elseif(session()->get('message')=='1')
+                    <div class="alert alert-success">
+                        <p>সফলভাবে যোগ করা হয়েছে</p>
+        
+                    </div>
+                @elseif(session()->get('message')=='5')
+                    <div class="alert alert-success">
+                        <p>সফলভাবে আপডেট হয়েছে</p>
+        
+                    </div>
+                @endif
             @endif
-        @endif
             <div class="col-7 align-self-center">
                 <div class="d-flex align-items-center justify-content-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="#">Home</a>
+                                <a href="#">হোম</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Add M.P Information</li>
+                            <li class="breadcrumb-item active" aria-current="page">এম.পি. এর তথ্য যোগ করুন</li>
                         </ol>
                     </nav>
                 </div>
@@ -54,13 +64,13 @@
             <div class="card">
                 <div class="card-body">
                     <!-- <h2 class="card-title text-center" style="text-transform: uppercase;">Add Police Station</h2>-->
-                    <form action='insert_mp_info' method="POST" class="form-horizontal form-material mx-2">
+                    <form action='insert_mp_info' method="POST" class="form-horizontal form-material mx-2" enctype="multipart/form-data">
                       @csrf
                     <div class="form-group d-flex">
-                            <label class="col-sm-12" style="width: 25%;">Add M.P Information</label>
+                            <label class="col-sm-12" style="width: 25%;">সংসদ নং</label>
                             <div class="col-sm-12" style="width: 75%;">
                                 <select name='p_id' class="form-select shadow-none form-control-line">
-                                    <option value="">Select parlament</option>
+                                    <option value="">সিলেক্ট সংসদ নং</option>
                                     @foreach($data_p as $data)
                                     <option value="{{$data->id}}">{{$data->name.'-'.$data->no}}</option>
                                     @endforeach   
@@ -69,28 +79,54 @@
                         </div>
 
                         <div class="form-group d-flex">
-                            <label class="col-sm-12" style="width: 25%;">M.P Name</label>
+                            <label class="col-sm-12" style="width: 25%;">নাম</label>
                             <div class="col-sm-12" style="width: 75%;">
-                                <input name='mp_name' type="text" placeholder="Insert M.P's Name" class="form-control form-control-line">
+                                <input name='mp_name' type="text" placeholder="নাম" class="form-control form-control-line">
                             </div>
                         </div>
+
+                        
+
+                       
                         <div class="form-group d-flex">
-                            <label class="col-sm-12" style="width: 25%;">M.P Phone</label>
+                            <label class="col-sm-12" style="width: 25%;">মোবাইল নম্বর</label>
                             <div class="col-sm-12" style="width: 75%;">
-                                <input name='mp_phone' type="number" placeholder="Insert M.P's phone No." class="form-control form-control-line">
+                                <input name='mp_phone' type="text" placeholder="মোবাইল নম্বর" class="form-control form-control-line">
                             </div>
                         </div>
+
                         <div class="form-group d-flex">
-                            <label class="col-sm-12" style="width: 25%;">M.P NID</label>
+                            <label class="col-sm-12" style="width: 25%;">ভোটার নং</label>
                             <div class="col-sm-12" style="width: 75%;">
-                                <input name='mp_nid' type="number" placeholder="Insert M.P's NID No." class="form-control form-control-line">
+                                <input name='mp_nid' type="text" placeholder="ভোটার নং" class="form-control form-control-line">
+                            </div>
+                        </div>
+
+                        <div class="form-group d-flex">
+                            <label class="col-sm-12" style="width: 25%;">ই-মেইল</label>
+                            <div class="col-sm-12" style="width: 75%;">
+                                <input name='mp_email' type="email" placeholder="ই-মেইল" class="form-control form-control-line">
+                            </div>
+                        </div>
+
+                        <div class="form-group d-flex">
+                            <label class="col-sm-12" style="width: 25%;">জন্ম তারিখ</label>
+                            <div class="col-sm-12" style="width: 75%;">
+                                <input name='mp_dob' type="date" lang="bn"  class="form-control form-control-line">
+                            </div>
+                        </div>
+
+                        <div class="form-group d-flex">
+                            <label class="col-sm-12" style="width: 25%;">ছবি</label>
+                            <div class="col-sm-12" style="width: 75%;">
+                                <input name='mp_img' type="file" placeholder="ছবি" class="form-control form-control-line">
                             </div>
                         </div>
                        
                         <div class="form-group d-flex">
                             <div class="col-sm-12" style="width: 25%;"></div>
                             <div class="col-sm-12" style="width: 75%;">
-                                <button href='insert_ps' class="btn btn-success text-white">Submit</button> <button class="btn btn-success text-white">Reset</button>
+                                <button href='insert_ps' class="btn btn-success text-white">জমা দিন</button> 
                             </div>
                         </div>
                     </form>
@@ -115,33 +151,40 @@
             <div class="col-12  w-75 m-auto">
                 <div class="card">
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered">
+                        <table id="datatable" class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th class="border-top-0 text-center">SL</th>
-                                    <th class="border-top-0 text-center">Parlament</th>
-                                    <th class="border-top-0 text-center">M.P's Name</th>
-                                    <th class="border-top-0 text-center">M.P's Phone</th>
-                                    <th class="border-top-0 text-center">M.P's NID</th>
-                                    <th class="border-top-0 text-center">Action</th>
+                                    <th class="border-top-0 text-center">সি. নং</th>
+                                    <th class="border-top-0 text-center">সংসদ নং</th>
+                                    <th class="border-top-0 text-center"> নাম</th>
+                                    <th class="border-top-0 text-center"> ভোটার নং</th>
+                                    <th class="border-top-0 text-center"> ফোন নাম্বার</th>
+                                    <th class="border-top-0 text-center">ই-মেইল</th>
+                                    <th class="border-top-0 text-center">জন্ম তারিখ</th>
+                                    <th class="border-top-0 text-center">ছবি</th>
+                                    <th class="border-top-0 text-center">ওপারেশন</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @foreach($data_mp as $data)
                                 <tr>
                                 <!--  -->
-                                    <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$loop->index+1}}
+                                    <td>{{$loop->index+1}}
                                     </td>
-                                    <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->name.'-'.$data->no}}</td>
-                                    <td style='line-height: 0.5;padding: .5rem; text-align: center'>{{$data->mp_name}}</td>
-                                    <td style='line-height: 0.5;padding: .5rem; text-align: center'>{{$data->mp_phone}}</td>
-                                    <td style='line-height: 0.5;padding: .5rem; text-align: center'>{{$data->mp_nid}}</td>
-                                    <td class="td_css" style='line-height: 0.5;padding: .5rem;text-align: center'>
-                                    <a  href='/ps_update_page/{{$data->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'><i class="bi bi-pen"></i></a>
+                                    <td>{{$data->name.'-'.$data->no}}</td>
+                                    <td >{{$data->mp_name}}</td>
+                                    <td type='tel' >{{$data->mp_phone}}</td>
+                                    <td >{{$data->mp_nid}}</td>
+                                    <td >{{$data->mp_email}}</td>
+                                    <td >{{$data->mp_dob}}</td>
+                                    <td class="td_n_img"><img class="img img-control" src="{{asset("storage/image/$data->mp_img")}}" alt=""></td>
+
+                                    <td class="td_css">
+                                    <a  href='/update_page_mp/{{$data->id}}'  class="btn btn-info"><i class="bi bi-pen"></i></a>
                                     <form class="spacing" method="POST" action='/delete/mpDetail/{{$data->id}}'>
                                         @csrf
                                         @method('delete')
-                                        <button id='custom-btn' class="btn btn-danger"> <i class="bi bi-trash"></i> </button>
+                                        <button id='custom-btn' class="btn btn-danger" onclick="return confirm('Are you sure??')"> <i class="bi bi-trash"></i> </button>
                                      </form>
                                 </td>
                                 

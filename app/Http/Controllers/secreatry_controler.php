@@ -14,7 +14,8 @@ use App\Models\designation;
 class secreatry_controler extends Controller
 {
    
-    function show(){
+    function show()
+    {
         
         $data_p = parlament_seat::all();
         $data_designation = designation::all();
@@ -31,20 +32,20 @@ class secreatry_controler extends Controller
 
     }
 
-    function insert(request $request){
+    function insert(request $request)
+    {
        
         $a = $request->p_id;
         $b = $request->ps_id;
         $c = $request->d_id;
-        $d = $request->rp_nid;
         $e = $request->rp_phone;
+        $d = $request->rp_nid;
         $combine = $a.$b.$c;
         $ps = policeStationResponsibleParson::all();
         foreach($ps as $data){
             $search='';
             $com = $data->p_id.$data->ps_id.$data->d_id;
-            // dump($com);
-            //     dump($combine);
+           
             if($combine==$com){
                 
                 $search=$com;
@@ -60,22 +61,13 @@ class secreatry_controler extends Controller
         else{
             foreach($ps as $data){
                 $search='';
-                // $com = $data->mp_nid.$data->mp_phone;
                 $com = "0";
                 if($data->rp_nid==$d ||$data->rp_phone ==$e ){
                     $search=$com;
-                    // return redirect('/show_mp_info')->with('message', '0');
-    
+                   
                 }else{
                    
-                    // $insert = new mpDetail;
-                    // $insert->p_id = $request->p_id;
-                    //     // echo $insert->PS_name;
-                    // $insert->mp_name= $request->mp_name;
-                    // $insert->mp_phone= $request->mp_phone;
-                    // $insert->mp_nid= $request->mp_nid;
-                    // $insert->save();
-                    // return redirect('/show_mp_info')->with('message', '1');
+                  
                 }
             }
             if($search=='0'){
@@ -89,136 +81,107 @@ class secreatry_controler extends Controller
                 $insert->rp_name= $request->rp_name;
                 $insert->rp_phone= $request->rp_phone;
                 $insert->rp_nid= $request->rp_nid;
+                $insert->rp_email= $request->rp_email;
+                $insert->rp_dob= $request->rp_dob;
+
+                if($request->hasFile('rp_img')){
+                    $img = $request->file('rp_img');
+                    $img_name = time().'.'.$img->getClientOriginalExtension();
+                    $img->move('storage/image',$img_name);
+                    $insert['rp_img']=$img_name;
+                }
+
+
                 $insert->save();
                 return redirect('/show_thana_rs_info')->with('message', '1');
             }
             
         }
-    
-
-        // if(!empty($request->p_id) && !empty($request->ps_id) && !empty($request->d_id) && !empty($request->rp_name) && !empty($request->rp_phone) && !empty($request->rp_nid))
-        // {
-        //     $p_ids = policeStationResponsibleParson::where('p_id', '=', $request->input('p_id'))->first();
-        //     $ps_ids = policeStationResponsibleParson::where('ps_id', '=', $request->input('ps_id'))->first();
-        //     $d_ids = policeStationResponsibleParson::where('d_id', '=', $request->input('d_id'))->first();
-        //     $rp_names = policeStationResponsibleParson::where('rp_name', '=', $request->input('rp_name'))->first();
-        //     $rp_phones = policeStationResponsibleParson::where('rp_phone', '=', $request->input('rp_phone'))->first();
-        //     $rp_nids = policeStationResponsibleParson::where('rp_nid', '=', $request->input('rp_nid'))->first();
-
-
-
-        //     if($p_ids ===null && $rp_phones===null && $rp_nids===null){
-        //         $insert = new policeStationResponsibleParson;
-
-        //         $insert->p_id = $request->p_id;
-        //         $insert->ps_id = $request->ps_id;
-        //         $insert->d_id = $request->d_id;
-        //         $insert->rp_name= $request->rp_name;
-        //         $insert->rp_phone= $request->rp_phone;
-        //         $insert->rp_nid= $request->rp_nid;
-        //         $insert->save();
-
-        //         return redirect('/show_thana_rs_info')->with('message', '1');
-        //     }
-
-        //     elseif ( $p_ids===null&&$ps_ids==null && $rp_phones===null&& $rp_nids===null) { 
-        //         $insert = new policeStationResponsibleParson;
-                
-        //         $insert->p_id = $request->p_id;
-        //         $insert->ps_id = $request->ps_id;
-        //         $insert->d_id = $request->d_id;
-        //         $insert->rp_name= $request->rp_name;
-        //         $insert->rp_phone= $request->rp_phone;
-        //         $insert->rp_nid= $request->rp_nid;
-        //         $insert->save();
-
-        //         return redirect('/show_thana_rs_info')->with('message', '1');
-    
-              
-        //     }
          
-        //     elseif ($p_ids ===null&& $ps_ids===null&& $d_ids===null && $rp_phones===null&& $rp_nids===null) { 
-        //         $insert = new policeStationResponsibleParson;
-                
-        //         $insert->p_id = $request->p_id;
-        //         $insert->ps_id = $request->ps_id;
-        //         $insert->d_id = $request->d_id;
-        //         $insert->rp_name= $request->rp_name;
-        //         $insert->rp_phone= $request->rp_phone;
-        //         $insert->rp_nid= $request->rp_nid;
-        //         $insert->save();
-
-        //         return redirect('/show_thana_rs_info')->with('message', '1');
-              
-        //     }
-        //     elseif ( $ps_ids===null && $rp_phones===null&& $rp_nids===null) { 
-        //         $insert = new policeStationResponsibleParson;
-                
-        //         $insert->p_id = $request->p_id;
-        //         $insert->ps_id = $request->ps_id;
-        //         $insert->d_id = $request->d_id;
-        //         $insert->rp_name= $request->rp_name;
-        //         $insert->rp_phone= $request->rp_phone;
-        //         $insert->rp_nid= $request->rp_nid;
-        //         $insert->save();
-
-        //         return redirect('/show_thana_rs_info')->with('message', '1');
-    
-              
-        //     }
-        //     elseif ( $d_ids===null && $rp_phones===null&& $rp_nids===null) { 
-        //         $insert = new policeStationResponsibleParson;
-                
-        //         $insert->p_id = $request->p_id;
-        //         $insert->ps_id = $request->ps_id;
-        //         $insert->d_id = $request->d_id;
-        //         $insert->rp_name= $request->rp_name;
-        //         $insert->rp_phone= $request->rp_phone;
-        //         $insert->rp_nid= $request->rp_nid;
-        //         $insert->save();
-
-        //         return redirect('/show_thana_rs_info')->with('message', '1');
-    
-              
-        //     }
-        //     elseif ( $rp_names===null && $rp_phones===null&& $rp_nids===null) { 
-        //         $insert = new policeStationResponsibleParson;
-                
-        //         $insert->p_id = $request->p_id;
-        //         $insert->ps_id = $request->ps_id;
-        //         $insert->d_id = $request->d_id;
-        //         $insert->rp_name= $request->rp_name;
-        //         $insert->rp_phone= $request->rp_phone;
-        //         $insert->rp_nid= $request->rp_nid;
-        //         $insert->save();
-
-        //         return redirect('/show_thana_rs_info')->with('message', '1');
-    
-              
-        //     }
-        //     elseif($p_ids ===null&& $ps_ids===null&& $d_ids===null&&$rp_names&& $rp_phones===null&& $rp_nids===null){
-        //         $insert = new policeStationResponsibleParson;
-                
-        //         $insert->p_id = $request->p_id;
-        //         $insert->ps_id = $request->ps_id;
-        //         $insert->d_id = $request->d_id;
-        //         $insert->rp_name= $request->rp_name;
-        //         $insert->rp_phone= $request->rp_phone;
-        //         $insert->rp_nid= $request->rp_nid;
-        //         $insert->save();
-
-        //         return redirect('/show_thana_rs_info')->with('message', '1');
-        //     }
-        //     else{
-        //         return redirect('/show_thana_rs_info')->with('message', '0');
-        //     }
-
-
-        // }else{
-        //     return redirect('/show_thana_rs_info')->with('message', '2');
-        // }
-
-        
        
     }
+
+
+
+    public function update_page($id){
+        
+        $data_p = parlament_seat::all();
+        $data_designation = designation::all();
+        $data_thana_rs = policeStationResponsibleParson::where ('id',$id)->first();
+
+        return view('update_thana_rs_info',compact('data_p','data_designation','data_thana_rs'));
+    }
+
+
+
+
+
+ function update(request $request,$id)
+    {
+       
+        $a = $request->p_id;
+        $b = $request->ps_id;
+        $c = $request->d_id;
+        $d = $request->rp_nid;
+        $e = $request->rp_phone;
+        $combine = $a.$b.$c;
+        $ps = policeStationResponsibleParson::all();
+        $search='';
+     
+        // if($search==$combine){
+        //     return redirect('/update_page_thana_rs/'.$id)->with('message', '0');
+        // }
+        // else{
+            $search='';
+            foreach($ps as $data){
+                
+                $com = "0";
+                if($data->rp_nid==$d ||$data->rp_phone ==$e ){
+                    $search=$com;
+                   
+                }
+            }
+
+            if($search=='0'){
+                return redirect('/update_page_thana_rs/'.$id)->with('message', '0');
+            }
+            else{
+                $update = policeStationResponsibleParson::find($id);
+                $update->p_id = $request->p_id;
+                $update->ps_id = $request->ps_id;
+                $update->d_id = $request->d_id;
+                $update->rp_name= $request->rp_name;
+                $update->rp_phone= $request->rp_phone;
+                $update->rp_nid= $request->rp_nid;
+                $update->rp_email= $request->rp_email;
+                $update->rp_dob= $request->rp_dob;
+
+              
+
+                if($request->hasFile('rp_img'))
+                {
+                    unlink("storage/image/$update->rp_img");
+
+                    $img = $request->file('rp_img');
+                    $img_name = time().'.'.$img->getClientOriginalExtension();
+                    $img->move('storage/image',$img_name);
+                    $update['rp_img']=$img_name;
+                }
+                
+                $update->save();
+                return redirect('/show_thana_rs_info')->with('message', '5');
+            }
+        // }
+            
+        
+         
+       
+    }
+
+
+
+
+
+
+
 }

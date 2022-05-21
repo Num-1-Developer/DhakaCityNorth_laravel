@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2022 at 11:18 AM
+-- Generation Time: May 21, 2022 at 12:54 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `dhakacitynorth`
 --
-CREATE DATABASE IF NOT EXISTS `dhakacitynorth` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `dhakacitynorth`;
 
 -- --------------------------------------------------------
 
@@ -41,8 +39,8 @@ CREATE TABLE `designation` (
 --
 
 INSERT INTO `designation` (`id`, `d_name`, `created_at`, `updated_at`) VALUES
-(1, 'Presindent', '2022-05-17 05:03:07', '2022-05-17 05:03:07'),
-(2, 'Secreatry', '2022-05-17 05:03:40', '2022-05-17 05:03:40');
+(5, 'প্রেসিডেন্ট', '2022-05-19 06:34:35', '2022-05-19 06:34:35'),
+(6, 'সেক্রেটারি', '2022-05-19 06:34:38', '2022-05-19 06:34:38');
 
 -- --------------------------------------------------------
 
@@ -95,8 +93,11 @@ CREATE TABLE `mp_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `p_id` bigint(20) UNSIGNED NOT NULL,
   `mp_name` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mp_phone` int(11) NOT NULL,
-  `mp_nid` int(11) NOT NULL,
+  `mp_email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `mp_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mp_nid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mp_dob` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `mp_img` varchar(255) CHARACTER SET utf8 NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -105,8 +106,10 @@ CREATE TABLE `mp_details` (
 -- Dumping data for table `mp_details`
 --
 
-INSERT INTO `mp_details` (`id`, `p_id`, `mp_name`, `mp_phone`, `mp_nid`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Salman', 1988406007, 1265435489, '2022-05-17 03:18:19', '2022-05-17 03:18:19');
+INSERT INTO `mp_details` (`id`, `p_id`, `mp_name`, `mp_email`, `mp_phone`, `mp_nid`, `mp_dob`, `mp_img`, `created_at`, `updated_at`) VALUES
+(6, 14, 'নবির', 'nobir.gwd@gmail.com', '৭৫৪৬২', '৫৪৪৫৪৬৩৭৫', '2022-06-05', '1653115400.jpg', '2022-05-20 08:27:22', '2022-05-21 00:43:20'),
+(7, 13, 'নবির', 'nobir.wd@gmail.com', '১৯৮৮৪০৬০০৭', '৫৬৪৫৬12', '2022-05-19', '1653058740.jpg', '2022-05-20 08:59:00', '2022-05-20 08:59:00'),
+(8, 17, 'নবির', 'nobir.wd@gmail.com', '৪৫৪২', '২৪৫২৪১২', '2022-05-26', '1653130109.jpg', '2022-05-21 04:48:29', '2022-05-21 04:48:29');
 
 -- --------------------------------------------------------
 
@@ -117,7 +120,7 @@ INSERT INTO `mp_details` (`id`, `p_id`, `mp_name`, `mp_phone`, `mp_nid`, `create
 CREATE TABLE `parlament_seat` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no` int(11) NOT NULL,
+  `no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -127,10 +130,8 @@ CREATE TABLE `parlament_seat` (
 --
 
 INSERT INTO `parlament_seat` (`id`, `name`, `no`, `created_at`, `updated_at`) VALUES
-(2, 'Dhaka', 121, '2022-05-14 08:48:46', '2022-05-14 08:48:46'),
-(5, 'Dhaka', 452, '2022-05-15 12:13:51', '2022-05-15 12:13:51'),
-(6, 'Dhaka', 21, '2022-05-15 12:19:04', '2022-05-16 03:12:37'),
-(7, 'Dhaka', 444, '2022-05-17 08:37:09', '2022-05-17 08:37:09');
+(16, 'ঢাকা', '২', '2022-05-21 04:29:00', '2022-05-21 04:29:00'),
+(17, 'ঢাকা', '১', '2022-05-21 04:29:08', '2022-05-21 04:29:08');
 
 -- --------------------------------------------------------
 
@@ -181,24 +182,8 @@ CREATE TABLE `police_stations` (
 --
 
 INSERT INTO `police_stations` (`id`, `PS_name`, `P_id`, `created_at`, `updated_at`) VALUES
-(1, 'Sher-e-bangla Nagar', 1, '2022-05-14 06:38:07', '2022-05-14 06:38:07'),
-(2, 'Adabar', 1, '2022-05-14 07:20:09', '2022-05-14 07:20:09'),
-(3, 'Adabar', 3, '2022-05-14 08:36:06', '2022-05-14 08:36:06'),
-(4, 'gulshan', 4, '2022-05-14 08:36:19', '2022-05-14 08:36:19'),
-(5, 'Sher-e-bangla Nagar', 5, '2022-05-14 08:40:11', '2022-05-14 08:40:11'),
-(6, 'basabo', 1, '2022-05-14 08:49:03', '2022-05-14 08:49:03'),
-(8, 'Adabar', 4, '2022-05-15 07:54:26', '2022-05-15 07:54:26'),
-(9, 'Dhanmondi', 4, '2022-05-15 07:54:47', '2022-05-15 07:54:47'),
-(10, 'MIrpur-1', 2, '2022-05-15 07:55:15', '2022-05-15 07:55:15'),
-(11, 'mirpur-2', 2, '2022-05-15 07:55:48', '2022-05-15 07:55:48'),
-(12, 'mirpur-3', 2, '2022-05-15 07:55:59', '2022-05-15 07:55:59'),
-(14, 'polton', 5, '2022-05-15 12:14:13', '2022-05-15 12:14:13'),
-(15, 'Shahabag', 5, '2022-05-15 12:14:32', '2022-05-15 12:14:32'),
-(16, 'Dhanmondi', 6, '2022-05-15 12:19:36', '2022-05-15 12:19:36'),
-(17, 'Bosila', 6, '2022-05-15 12:19:50', '2022-05-15 12:19:50'),
-(18, 'Mohammodpur', 6, '2022-05-15 12:20:13', '2022-05-15 12:20:13'),
-(19, 'Tilla', 6, '2022-05-16 08:57:22', '2022-05-16 08:57:22'),
-(20, 'Rajbari', 6, '2022-05-18 00:31:22', '2022-05-18 00:31:22');
+(23, 'মিরপুর-১', 17, '2022-05-21 04:32:51', '2022-05-21 04:32:51'),
+(24, 'মিরপুর-২', 17, '2022-05-21 04:32:57', '2022-05-21 04:32:57');
 
 -- --------------------------------------------------------
 
@@ -212,8 +197,11 @@ CREATE TABLE `police_station_responsible_parsons` (
   `ps_id` bigint(20) UNSIGNED NOT NULL,
   `d_id` bigint(20) UNSIGNED NOT NULL,
   `rp_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rp_phone` int(11) NOT NULL,
-  `rp_nid` int(11) NOT NULL,
+  `rp_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rp_nid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rp_email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `rp_dob` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `rp_img` varchar(255) CHARACTER SET utf8 NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -222,8 +210,15 @@ CREATE TABLE `police_station_responsible_parsons` (
 -- Dumping data for table `police_station_responsible_parsons`
 --
 
-INSERT INTO `police_station_responsible_parsons` (`id`, `p_id`, `ps_id`, `d_id`, `rp_name`, `rp_phone`, `rp_nid`, `created_at`, `updated_at`) VALUES
-(7, 2, 11, 1, 'nobir', 32165123, 241562, '2022-05-17 06:25:54', '2022-05-17 06:25:54');
+INSERT INTO `police_station_responsible_parsons` (`id`, `p_id`, `ps_id`, `d_id`, `rp_name`, `rp_phone`, `rp_nid`, `rp_email`, `rp_dob`, `rp_img`, `created_at`, `updated_at`) VALUES
+(7, 2, 11, 1, 'nobir', '32165123', '241562', '', '', '', '2022-05-17 06:25:54', '2022-05-17 06:25:54'),
+(10, 2, 11, 2, 'Salman', '321651211', '2415', '', '', '', '2022-05-18 06:38:51', '2022-05-18 06:38:51'),
+(11, 2, 12, 1, 'Salman', '2415', '2415611', '', '', '', '2022-05-18 06:39:58', '2022-05-18 06:39:58'),
+(12, 5, 15, 1, 'nobir', '1234', '12345678', '', '', '', '2022-05-19 04:21:23', '2022-05-19 04:21:23'),
+(13, 5, 15, 2, 'Salman', '12345', '123456', '', '', '', '2022-05-19 04:21:55', '2022-05-19 04:21:55'),
+(14, 13, 21, 5, 'নবির', '৬৫৪৪২৪৫৬', '৪৫৬৭৫৮৬৭৪', '', '', '', '2022-05-19 06:37:19', '2022-05-20 05:11:30'),
+(15, 13, 21, 6, 'নবির', '৮৫৪৩২৫৪', '৬৫৪৭৮৫৭', 'sifat@gmail.com', '2022-05-18', '1653118114.jpg', '2022-05-21 01:15:38', '2022-05-21 01:28:34'),
+(16, 17, 23, 5, 'নবির', '৭৮৫৭৮৭৮', '৯৮৭৯৫৬৭৪৮', 'sifat@gmail.com', '2022-05-23', '1653130158.jpg', '2022-05-21 04:49:18', '2022-05-21 04:49:18');
 
 -- --------------------------------------------------------
 
@@ -247,7 +242,13 @@ CREATE TABLE `units` (
 
 INSERT INTO `units` (`id`, `p_id`, `ps_id`, `w_id`, `union_name`, `created_at`, `updated_at`) VALUES
 (1, 2, 11, 6, 'Parbat', '2022-05-16 06:05:20', '2022-05-16 06:05:20'),
-(3, 2, 11, 5, 'Parbats', '2022-05-16 09:19:03', '2022-05-16 09:19:03');
+(5, 2, 11, 5, '3', '2022-05-18 07:17:07', '2022-05-18 07:17:07'),
+(6, 2, 11, 5, '4', '2022-05-18 07:17:19', '2022-05-18 07:17:19'),
+(7, 5, 14, 3, '1', '2022-05-19 04:23:05', '2022-05-19 04:23:05'),
+(8, 13, 21, 19, 'পর্বত', '2022-05-19 06:33:30', '2022-05-20 05:10:25'),
+(9, 13, 21, 20, 'পর্বত', '2022-05-20 03:20:04', '2022-05-20 03:20:04'),
+(10, 17, 23, 21, 'পর্বত', '2022-05-21 04:47:16', '2022-05-21 04:47:16'),
+(11, 17, 23, 21, 'পর্বতস', '2022-05-21 04:47:30', '2022-05-21 04:47:30');
 
 -- --------------------------------------------------------
 
@@ -263,11 +264,26 @@ CREATE TABLE `unit_r_p_s` (
   `u_id` bigint(20) UNSIGNED NOT NULL,
   `d_id` bigint(20) UNSIGNED NOT NULL,
   `rp_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rp_phone` int(11) NOT NULL,
-  `rp_nid` int(11) NOT NULL,
+  `rp_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rp_nid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rp_email` varchar(255) CHARACTER SET utf8mb4 NOT NULL,
+  `rp_dob` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `rp_img` varchar(255) CHARACTER SET utf8 NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `unit_r_p_s`
+--
+
+INSERT INTO `unit_r_p_s` (`id`, `p_id`, `ps_id`, `w_id`, `u_id`, `d_id`, `rp_name`, `rp_phone`, `rp_nid`, `rp_email`, `rp_dob`, `rp_img`, `created_at`, `updated_at`) VALUES
+(3, 2, 11, 5, 5, 1, 'nobir', '123', '123', '', '', '', '2022-05-18 07:19:59', '2022-05-18 07:19:59'),
+(4, 5, 14, 3, 7, 1, 'nobir', '1234', '12345', '', '', '', '2022-05-19 04:23:28', '2022-05-19 04:23:28'),
+(5, 5, 14, 3, 7, 2, 'Salman', '123456', '123456', '', '', '', '2022-05-19 04:23:53', '2022-05-19 04:23:53'),
+(6, 13, 21, 19, 8, 5, 'নবির', '৪৫৬৪', '৪৫৬৩৪৫৬৩', '', '', '', '2022-05-19 06:37:45', '2022-05-19 06:37:45'),
+(7, 13, 21, 20, 9, 5, 'নবির', '৫৬৪৮৫৬', '৫৬৪৫৬৪৫৬৩৬', 'sifat@gmail.com', '2022-05-18', '1653119684.jpg', '2022-05-21 01:52:12', '2022-05-21 01:54:44'),
+(8, 17, 23, 21, 10, 5, 'নবির', '৫৭৮৫৬৭৮', '৮৭৬৮৭৬৫', 'sifat@gmail.com', '2022-05-18', '1653130388.jpg', '2022-05-21 04:53:08', '2022-05-21 04:53:08');
 
 -- --------------------------------------------------------
 
@@ -296,7 +312,7 @@ CREATE TABLE `words` (
   `id` int(11) NOT NULL,
   `p_id` int(11) DEFAULT NULL,
   `ps_id` int(11) NOT NULL,
-  `w_number` int(11) NOT NULL,
+  `w_number` varchar(255) NOT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -306,14 +322,21 @@ CREATE TABLE `words` (
 --
 
 INSERT INTO `words` (`id`, `p_id`, `ps_id`, `w_number`, `updated_at`, `created_at`) VALUES
-(1, 2, 2, 23, '2022-05-16 04:01:48', '2022-05-16 04:01:48'),
-(3, 5, 14, 1, '2022-05-16 04:44:57', '2022-05-16 04:44:57'),
-(5, 2, 11, 2, '2022-05-16 05:50:36', '2022-05-16 05:50:36'),
-(7, 6, 18, 1, '2022-05-17 09:17:35', '2022-05-17 09:17:35'),
-(8, 6, 17, 5, '2022-05-18 00:32:15', '2022-05-18 00:32:15'),
-(9, 6, 18, 4, '2022-05-18 00:32:35', '2022-05-18 00:32:35'),
-(10, 6, 16, 1, '2022-05-18 00:33:00', '2022-05-18 00:33:00'),
-(11, 5, 5, 12, '2022-05-18 01:12:43', '2022-05-18 01:12:43');
+(1, 2, 2, '23', '2022-05-16 04:01:48', '2022-05-16 04:01:48'),
+(3, 5, 14, '1', '2022-05-16 04:44:57', '2022-05-16 04:44:57'),
+(5, 2, 11, '2', '2022-05-16 05:50:36', '2022-05-16 05:50:36'),
+(7, 6, 18, '1', '2022-05-17 09:17:35', '2022-05-17 09:17:35'),
+(8, 6, 17, '5', '2022-05-18 00:32:15', '2022-05-18 00:32:15'),
+(9, 6, 18, '4', '2022-05-18 00:32:35', '2022-05-18 00:32:35'),
+(10, 6, 16, '1', '2022-05-18 00:33:00', '2022-05-18 00:33:00'),
+(11, 5, 5, '12', '2022-05-18 01:12:43', '2022-05-18 01:12:43'),
+(12, 2, 11, '7', '2022-05-18 03:58:14', '2022-05-18 03:58:14'),
+(15, 2, 11, '5', '2022-05-18 05:31:09', '2022-05-18 05:31:09'),
+(18, 2, 11, '55', '2022-05-18 05:50:09', '2022-05-18 05:50:09'),
+(19, 13, 21, '১', '2022-05-19 06:33:02', '2022-05-19 06:33:02'),
+(20, 13, 21, '২', '2022-05-20 05:09:51', '2022-05-19 06:43:18'),
+(21, 17, 23, '১', '2022-05-21 04:46:43', '2022-05-21 04:46:43'),
+(22, 17, 23, '২', '2022-05-21 04:46:53', '2022-05-21 04:46:53');
 
 -- --------------------------------------------------------
 
@@ -328,8 +351,11 @@ CREATE TABLE `word_rps` (
   `w_id` bigint(20) UNSIGNED NOT NULL,
   `d_id` bigint(20) UNSIGNED NOT NULL,
   `rp_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rp_phone` int(11) NOT NULL,
-  `rp_nid` int(11) NOT NULL,
+  `rp_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rp_nid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rp_email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `rp_dob` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `rp_img` varchar(255) CHARACTER SET utf8 NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -338,8 +364,12 @@ CREATE TABLE `word_rps` (
 -- Dumping data for table `word_rps`
 --
 
-INSERT INTO `word_rps` (`id`, `p_id`, `ps_id`, `w_id`, `d_id`, `rp_name`, `rp_phone`, `rp_nid`, `created_at`, `updated_at`) VALUES
-(1, 2, 11, 5, 1, 'nobir', 54654, 56456, '2022-05-17 07:33:31', '2022-05-17 07:33:31');
+INSERT INTO `word_rps` (`id`, `p_id`, `ps_id`, `w_id`, `d_id`, `rp_name`, `rp_phone`, `rp_nid`, `rp_email`, `rp_dob`, `rp_img`, `created_at`, `updated_at`) VALUES
+(1, 2, 11, 5, 1, 'nobir', '54654', '56456', '', '', '', '2022-05-17 07:33:31', '2022-05-17 07:33:31'),
+(2, 2, 11, 5, 2, 'nobir', '123', '123', '', '', '', '2022-05-18 07:13:46', '2022-05-18 07:13:46'),
+(4, 13, 21, 19, 5, 'নবিরস', '৪৩৫', '৪৫৩', '', '', '', '2022-05-19 08:18:56', '2022-05-20 04:37:53'),
+(5, 13, 21, 19, 6, 'নবিরস', '৫৪৫৬৩৪৫', '৫৪৬৩৫৩৫৬', 'sifat@gmail.com', '2022-05-18', '1653119132.jpg', '2022-05-21 01:37:03', '2022-05-21 01:45:32'),
+(6, 17, 23, 21, 5, 'নবির', '৮৬৪৫৬৮৭', '৬৮৯৬৮৯৬৫', 'sifat@gmail.com', '2022-05-26', '1653130207.jpg', '2022-05-21 04:50:07', '2022-05-21 04:50:07');
 
 --
 -- Indexes for dumped tables
@@ -441,7 +471,7 @@ ALTER TABLE `word_rps`
 -- AUTO_INCREMENT for table `designation`
 --
 ALTER TABLE `designation`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -459,13 +489,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `mp_details`
 --
 ALTER TABLE `mp_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `parlament_seat`
 --
 ALTER TABLE `parlament_seat`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -477,25 +507,25 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `police_stations`
 --
 ALTER TABLE `police_stations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `police_station_responsible_parsons`
 --
 ALTER TABLE `police_station_responsible_parsons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `units`
 --
 ALTER TABLE `units`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `unit_r_p_s`
 --
 ALTER TABLE `unit_r_p_s`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -507,13 +537,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `words`
 --
 ALTER TABLE `words`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `word_rps`
 --
 ALTER TABLE `word_rps`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

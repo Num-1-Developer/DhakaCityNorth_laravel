@@ -11,22 +11,27 @@
       <div class="page-breadcrumb">
           <div class="row">
               <div class="col-5 align-self-center">
-                  <h4 class="page-title">Add Parlament</h4>
+                  <h4 class="page-title">সংসদ এলাকা যোগ করুন</h4>
               </div>
             @if(session()->has('message'))
                 @if(session()->get('message')=='0')
                     <div class="alert alert-danger">
-                        <p>You value already existed (Insert Failed)</p>
+                        <p>আপনার দেওয়া তথ্য বিদ্যমান আছে</p>
         
                     </div>
                 @elseif(session()->get('message')=='4')
                     <div class="alert alert-success">
-                        <p>Delete Success</p>
+                        <p>সফলভাবে ডিলেট হয়েছে</p>
         
                     </div>
-                @else
+                @elseif(session()->get('message')=='1')
                     <div class="alert alert-success">
-                        <p>Insert Success</p>
+                        <p>সফলভাবে যোগ করা হয়েছে</p>
+        
+                    </div>
+                @elseif(session()->get('message')=='5')
+                    <div class="alert alert-success">
+                        <p>সফলভাবে আপডেট হয়েছে</p>
         
                     </div>
                 @endif
@@ -36,9 +41,9 @@
                       <nav aria-label="breadcrumb">
                           <ol class="breadcrumb">
                               <li class="breadcrumb-item">
-                                  <a href="#">Home</a>
+                                  <a href="#">হোম</a>
                               </li>
-                              <li class="breadcrumb-item active" aria-current="page">Add Parlament Information</li>
+                              <li class="breadcrumb-item active" aria-current="page">সংসদ এলাকা</li>
                           </ol>
                       </nav>
                   </div>
@@ -63,24 +68,24 @@
                         @csrf
                       <div class="form-group d-flex">
                         
-                              <label class="col-sm-12" style="width: 25%;">Add Parlament</label>
+                              <label class="col-sm-12" style="width: 25%;">সংসদ এলাকা</label>
                               <div class="col-sm-12" style="width: 75%;">
                                   <select name='name' class="form-select shadow-none form-control-line">
-                                      <option value="Dhaka">Dhaka</option>  
+                                      <option value="ঢাকা">ঢাকা</option>  
                                   </select>
                               </div>
                           </div>
                           <div class="form-group d-flex">
-                              <label class="col-sm-12" style="width: 25%;"> Number</label>
+                              <label class="col-sm-12" style="width: 25%;"> সংসদ নং</label>
                               <div class="col-sm-12" style="width: 75%;">
-                                  <input name='no' type="number" placeholder="Number" class="form-control form-control-line">
+                                  <input name='no' type="text" placeholder="সংসদ নং" class="form-control form-control-line">
                               </div>
                           </div>
                          
                           <div class="form-group d-flex">
                               <div class="col-sm-12" style="width: 25%;"></div>
                               <div class="col-sm-12" style="width: 75%;">
-                                  <button class="btn btn-success text-white">Submit</button>
+                                  <button class="btn btn-success text-white">যোগ করুন</button>
                               </div>
                           </div>
                           
@@ -101,12 +106,12 @@
               <div class="col-12  w-75 m-auto">
                   <div class="card">
                       <div class="table-responsive">
-                          <table class="table table-hover table-bordered">
+                          <table id="datatable" class="table table-hover table-bordered">
                               <thead>
                                   <tr>
-                                      <th class="border-top-0 text-center">SL</th>
-                                      <th class="border-top-0 text-center">Parlament</th>
-                                      <th class="border-top-0 text-center">Action</th>
+                                      <th class="border-top-0 text-center">সি. নং</th>
+                                      <th class="border-top-0 text-center">সংসদ এলাকা</th>
+                                      <th class="border-top-0 text-center">অপারেশন</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -121,7 +126,7 @@
                                       <form class="spacing" method="POST" action='/delete/parlament_seat/{{$data->id}}' >
                                         @csrf
                                                 @method('delete')
-                                                <button id='custom-btn' class="btn btn-danger"> <i class="bi bi-trash"></i> </button>
+                                                <button id='custom-btn' data-confirm='Are you sure??' class="btn btn-danger"> <i class="bi bi-trash" onclick="return confirm('Are you sure??')"></i> </button>
                                      </form>
                                   </td>
                                   

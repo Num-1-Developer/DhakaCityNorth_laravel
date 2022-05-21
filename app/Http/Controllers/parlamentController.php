@@ -37,24 +37,19 @@ if ($user ===null) {
     }
    
     public function update_page($id){
-        $data_fetch = parlament_seat::orderBY('id','desc')->get();
         $data = parlament_seat::where ('id',$id)->first();
-        return view('parlament_update_page',compact('data_fetch','data'));
+        return view('parlament_update_page',compact('data'));
     }
 
     public function update(request $request,$id){
+
         $update = parlament_seat::where('id',$id)->first();
  
         $update->name= $request->name ;
         $update->no= $request->no;
         $update->save();
-        return redirect('/add_parlament_info');
+        return redirect('/add_parlament_info')->with('message', '5');
         
     }
-    public function delete($id){
-        $data = parlament_seat::where('id',$id)->first();
-        $data->delete();
-        return redirect('/add_parlament_info');
-        // return view('add_category');
-    }
+   
 }

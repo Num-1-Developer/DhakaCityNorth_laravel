@@ -39,3 +39,32 @@ td #custom-btn i {
 td a i {
     color: lime;
 }
+
+tbody .td_n_img img {
+    height: 45px;
+    width: 60px;
+}
+
+tbody tr td {
+    line-height: unset;
+    padding: unset;
+}
+
+.tr_n_td td {
+    padding: -1px;
+    padding-top: 18px;
+}
+
+.dataTables_length {
+    display: inline-block;
+    margin-right: 50%;
+}
+.dataTables_filter {
+    display: inline-block;
+}
+
+.dataTables_paginate {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px 5px;
+}

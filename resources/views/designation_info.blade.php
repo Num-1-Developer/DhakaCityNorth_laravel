@@ -11,17 +11,27 @@
       <div class="page-breadcrumb">
           <div class="row">
               <div class="col-5 align-self-center">
-                  <h4 class="page-title">Add Designation information</h4>
+                  <h4 class="page-title">কমিটি যোগ করুন</h4>
               </div>
               @if(session()->has('message'))
               @if(session()->get('message')=='0')
                   <div class="alert alert-danger">
-                      <p>You value already existed (Insert Failed)</p>
+                      <p>আপনার দেওয়া তথ্য বিদ্যমান আছে</p>
       
                   </div>
-              @else
+              @elseif(session()->get('message')=='4')
                   <div class="alert alert-success">
-                      <p>Insert Success</p>
+                      <p>সফলভাবে ডিলেট হয়েছে</p>
+      
+                  </div>
+              @elseif(session()->get('message')=='1')
+                  <div class="alert alert-success">
+                      <p>সফলভাবে যোগ করা হয়েছে</p>
+      
+                  </div>
+              @elseif(session()->get('message')=='5')
+                  <div class="alert alert-success">
+                      <p>সফলভাবে আপডেট হয়েছে</p>
       
                   </div>
               @endif
@@ -31,9 +41,10 @@
                       <nav aria-label="breadcrumb">
                           <ol class="breadcrumb">
                               <li class="breadcrumb-item">
-                                  <a href="#">Home</a>
+                                  <a href="#">হোম</a>
                               </li>
-                              <li class="breadcrumb-item active" aria-current="page">Add Designation Information</li>
+                              <li class="breadcrumb-item active" aria-current="page">কমিটি যোগ করুন
+                              </li>
                           </ol>
                       </nav>
                   </div>
@@ -58,12 +69,12 @@
                       <form action='insert_designation_info' method="POST" class="form-horizontal form-material mx-2">
                         @csrf
                       <div class="form-group d-flex">
-                              <label class="col-sm-12" style="width: 25%;">Designation Name</label>
+                              <label class="col-sm-12" style="width: 25%;">কমিটির নাম</label>
                               <div class="col-sm-12" style="width: 75%;">
                                   <select name='d_name' class="form-select shadow-none form-control-line">
-                                      <option value="Presindent">Select Designatin Name</option>  
-                                      <option value="Presindent">President</option>  
-                                      <option value="Secreatry">Secreatry</option>  
+                                      <option value="Presindent">কমিটির নাম সিলেক্ট করুন</option>  
+                                      <option value="প্রেসিডেন্ট">প্রেসিডেন্ট</option>  
+                                      <option value="সেক্রেটারি">সেক্রেটারি</option>  
                                   </select>
                               </div>
                           </div>
@@ -71,7 +82,7 @@
                           <div class="form-group d-flex">
                               <div class="col-sm-12" style="width: 25%;"></div>
                               <div class="col-sm-12" style="width: 75%;">
-                                  <button class="btn btn-success text-white">Submit</button> 
+                                  <button class="btn btn-success text-white">জমা দিন</button> 
                               </div>
                           </div>
                           
@@ -95,9 +106,9 @@
                           <table class="table table-hover table-bordered">
                               <thead>
                                   <tr>
-                                      <th class="border-top-0 text-center">SL</th>
-                                      <th class="border-top-0 text-center">Designation Name</th>
-                                      <th class="border-top-0 text-center">Action</th>
+                                      <th class="border-top-0 text-center">সি. নং</th>
+                                      <th class="border-top-0 text-center">কমিটির নাম</th>
+                                      {{-- <th class="border-top-0 text-center">ওপারেশন</th> --}}
                                   </tr>
                               </thead>
                               <tbody>
@@ -107,15 +118,15 @@
                                       <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$loop->index+1}}
                                       </td>
                                       <td style='line-height: 0.5;padding: .5rem;text-align: center'>{{$data->d_name}}</td>
-                                      <td class="td_css" style='line-height: 0.5;padding: .5rem;text-align: center'>
+                                      {{-- <td class="td_css" style='line-height: 0.5;padding: .5rem;text-align: center'>
                                             <td class="td_css" style='line-height: 0.5;padding: .5rem;text-align: center'>
-                                      <a   href='/parlament_update_page/{{$data->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'><i class="bi bi-pen"></i></a>
+                                      <a   href='/update_page_ps/{{$data->id}}' name="btn_edit" class="btn btn-info" style='line-height: 0.5;padding: .5rem'><i class="bi bi-pen"></i></a>
                                       <form class="spacing" method="POST" action='/delete/designation/{{$data->id}}'>
                                         @csrf
                                         @method('delete')
-                                        <button id="custom-btn" class="btn btn-danger"> <i class="bi bi-trash"></i> </button>
+                                        <button id="custom-btn" class="btn btn-danger" onclick="return confirm('Are you sure??')"> <i class="bi bi-trash"></i> </button>
                                      </form>
-                                  </td>
+                                  </td> --}}
                                   
                                   </tr>
                               @endforeach

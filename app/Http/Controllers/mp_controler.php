@@ -6,10 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\parlament_seat;
 use App\Models\mpDetail;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class mp_controler extends Controller
 {
-    function show(){
+
+
+    function show()
+    {
         
         $data_p = parlament_seat::all();
        $data_mp = DB::table('mp_details')
@@ -23,7 +27,8 @@ class mp_controler extends Controller
 
 
 
-    function insert(request $request){
+    function insert(request $request)
+    {
 
         $a = $request->p_id;
         // $b = $request->ps_id;
@@ -31,6 +36,80 @@ class mp_controler extends Controller
         $d = $request->mp_phone;
         $combine = $c.$d;
         $ps = mpDetail::all();
+        $search='';
+        foreach($ps as $data){
+           
+            $com = $data->p_id;
+
+            if($a==$com){
+                $search=$com;
+
+            }
+        }
+        if($search==$a){
+            return redirect('/show_mp_info')->with('message', '0');
+        }
+        else{
+            $search='';
+            foreach($ps as $data){
+                
+              
+                
+                if($data->mp_nid==$c ||$data->mp_phone ==$d ){
+                    $search=1;
+                  
+                }
+
+            }
+            if($search==1){
+                return redirect('/show_mp_info')->with('message', '0');
+            }
+            else{
+                $insert = new mpDetail;
+                $insert->p_id = $request->p_id;
+                
+                $insert->mp_name= $request->mp_name;
+                $insert->mp_email= $request->mp_email;
+                $insert->mp_phone= $request->mp_phone;
+                $insert->mp_nid= $request->mp_nid;
+                $insert->mp_dob= $request->mp_dob;
+
+                if($request->hasFile('mp_img')){
+                    $img = $request->File('mp_img');
+                    $img_name =time().'.'.$img->getClientOriginalExtension();
+                    $img->move('storage/image',$img_name);
+
+                    $insert['mp_img']=$img_name;
+                  }
+                $insert->save();
+                return redirect('/show_mp_info')->with('message', '1');
+            }
+            
+        }
+
+    }
+
+
+
+    public function update_page($id){
+        
+        $data_p = parlament_seat::all();
+        $data_mp = mpDetail::where ('id',$id)->first();
+        return view('updat_mp_info',compact('data_p','data_mp'));
+    }
+
+
+
+    function update(request $request,$id)
+    {
+
+        $a = $request->p_id;
+        
+        $c = $request->mp_nid;
+        $d = $request->mp_phone;
+        $combine = $c.$d;
+        $ps = mpDetail::all();
+
         foreach($ps as $data){
             $search='';
             $com = $data->p_id;
@@ -43,88 +122,64 @@ class mp_controler extends Controller
             }
         }
         if($search==$a){
-            return redirect('/show_mp_info')->with('message', '0');
+            return redirect('/update_page_mp/'.$id)->with('message', '0');
         }
         else{
             foreach($ps as $data){
                 $search='';
-                // $com = $data->mp_nid.$data->mp_phone;
+              
                 $com = "0";
                 if($data->mp_nid==$c ||$data->mp_phone ==$d ){
                     $search=$com;
-                    // return redirect('/show_mp_info')->with('message', '0');
-    
-                }else{
-                   
-                    // $insert = new mpDetail;
-                    // $insert->p_id = $request->p_id;
-                    //     // echo $insert->PS_name;
-                    // $insert->mp_name= $request->mp_name;
-                    // $insert->mp_phone= $request->mp_phone;
-                    // $insert->mp_nid= $request->mp_nid;
-                    // $insert->save();
-                    // return redirect('/show_mp_info')->with('message', '1');
+                  
                 }
             }
+
             if($search=='0'){
-                return redirect('/show_mp_info')->with('message', '0');
+                return redirect('/update_page_mp/'.$id)->with('message', '0');
             }
             else{
-                $insert = new mpDetail;
-                $insert->p_id = $request->p_id;
-                    // echo $insert->PS_name;
-                $insert->mp_name= $request->mp_name;
-                $insert->mp_phone= $request->mp_phone;
-                $insert->mp_nid= $request->mp_nid;
-                $insert->save();
-                return redirect('/show_mp_info')->with('message', '1');
+
+                $request->validate([
+
+                    "p_id"=>'required',
+                    "mp_name"=>'required',
+
+                    "mp_phone"=>'required',
+
+                    "mp_nid"=>'required',
+                    "mp_img"=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+                ]);
+                $update = mpDetail::find($id);
+
+                $update->p_id = $request->p_id;
+                $update->mp_name= $request->mp_name;
+                $update->mp_email= $request->mp_email;
+                $update->mp_phone= $request->mp_phone;
+                $update->mp_nid= $request->mp_nid;
+
+                $update->mp_dob= $request->mp_dob;
+                unlink("storage/image/$update->mp_img");
+
+
+                if($request->hasFile('mp_img')){
+                    
+                    $img = $request->File('mp_img');
+                    $img_name =time().'.'.$img->getClientOriginalExtension();
+                    $img->move('storage/image',$img_name);
+
+                    $update['mp_img']=$img_name;
+                   
+                  }
+
+                $update->save();
+                return redirect('/show_mp_info')->with('message', '5');
             }
             
         }
 
-        // $p_id = mpDetail::where('p_id', '=', $request->input('p_id'))->first();
-
-        // if ($p_id ===null) { 
-        //     $mp_phone = mpDetail::where('mp_phone', '=', $request->input('mp_phone'))->first();
-        //     if($mp_phone===null){
-        //         $mp_nid = mpDetail::where('mp_nid', '=', $request->input('mp_nid'))->first();
-        //         if($mp_nid===null){
-        //             $insert = new mpDetail;
-        //             $insert->p_id = $request->p_id;
-        //             // echo $insert->PS_name;
-        //             $insert->mp_name= $request->mp_name;
-        //             $insert->mp_phone= $request->mp_phone;
-        //             $insert->mp_nid= $request->mp_nid;
-        //             $insert->save();
-
-        //             return redirect('/show_mp_info')->with('message', '1');
-        //         }else{
-        //             return redirect('/show_mp_info')->with('message', '0');
-        //         }
-        //     }else{
-        //         return redirect('/show_mp_info')->with('message', '0');
-        //     }
-
-          
-        // }
-        // else{
-        //     $mp_name = mpDetail::where('mp_name', '=', $request->input('mp_name'))->first();
-
-        //     if($mp_name===null){
-        //         $insert = new mpDetail;
-        //         $insert->p_id = $request->p_id;
-        //         // echo $insert->PS_name;
-        //         $insert->mp_name= $request->mp_name;
-        //         $insert->mp_phone= $request->mp_phone;
-        //         $insert->mp_nid= $request->mp_nid;
-        //         $insert->save();
-
-        //         return redirect('/show_mp_info')->with('message', '1');
-        //     }else{
-        //         return redirect('/show_mp_info')->with('message', '0');
-        //     }
-         
-        
-        // }
     }
+
+
+
 }

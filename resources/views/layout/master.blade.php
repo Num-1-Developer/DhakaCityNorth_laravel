@@ -12,15 +12,17 @@
         content="Nice Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     <title>Nice Admin Lite Template by WrapPixel</title>
-    <link rel="canonical" href="https://www.wrappixel.com/templates/niceadmin-lite/" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link rel="canonical" href="{{asset('https://www.wrappixel.com/templates/niceadmin-lite/')}}" />
+    <link rel="stylesheet" href="{{asset('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css')}}">
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets/images/favicon.png')}}">
     <!-- Custom CSS -->
-    <link href="assets/libs/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link href="{{asset('assets/libs/chartist/dist/chartist.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="dist/css/style.min.css" rel="stylesheet">
-    <link href="assets/up.css" rel="stylesheet">
+    {{-- {{asset('css/bootstrap.min.css')}} --}}
+    <link href="{{asset('dist/css/style.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/up.css')}}" rel="stylesheet">
+   
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -58,22 +60,22 @@
                     <!-- Logo -->
                     <!-- ============================================================== -->
                     <div class="navbar-brand">
-                        <a href="/" class="logo">
+                        <a href="{{url('/')}}" class="logo">
                             <!-- Logo icon -->
                             <b class="logo-icon">
                                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                                 <!-- Dark Logo icon -->
-                                <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                                <img src="{{asset('assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo icon -->
-                                <img src="assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                                <img src="{{asset('assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" />
                             </b>
                             <!--End Logo icon -->
                             <!-- Logo text -->
                             <span class="logo-text">
                                 <!-- dark Logo text -->
-                                <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                                <img src="{{asset('assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" />
                                 <!-- Light Logo text -->
-                                <img src="assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                                <img src="{{asset('assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" />
                             </span>
                         </a>
                     </div>
@@ -101,7 +103,7 @@
                                 <div class="d-flex align-items-center">
                                     <i class="mdi mdi-magnify font-20 me-1"></i>
                                     <div class="ms-1 d-none d-sm-block">
-                                        <span>Search</span>
+                                        <span>অনুসন্ধান</span>
                                     </div>
                                 </div>
                             </a>
@@ -153,66 +155,66 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="add_parlament_info"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('add_parlament_info')}}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-av-timer"></i>
-                                <span class="hide-menu">Add Parlament Informatiom</span>
+                                <span class="hide-menu">সংসদ নং যোগ করুন</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="Add_Police_Station"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('Add_Police_Station')}}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">Add Police Station</span>
+                                <span class="hide-menu">থানা যোগ করুন</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="add_word_info"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('add_word_info')}}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">Add Word</span>
+                                <span class="hide-menu">ওয়ার্ড যোগ করুন</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="add_unit_info"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('add_unit_info')}}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-account-network"></i>
-                                <span class="hide-menu">Add Union</span>
+                                <span class="hide-menu">ইউনিয়ন যোগ করুন</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="show_designation_info"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('show_designation_info')}}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-arrange-bring-forward"></i>
-                                <span class="hide-menu">Add Designation Information</span>
+                                <span class="hide-menu">কমিটি যোগ করুন</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="show_mp_info"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('show_mp_info')}}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-border-none"></i>
-                                <span class="hide-menu">Add M.P Information</span>
+                                <span class="hide-menu">এম.পি এর তথ্য যোগ করুন</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="show_thana_rs_info"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('show_thana_rs_info')}}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-face"></i>
-                                <span class="hide-menu">Add Thana R.P. Information</span>
+                                <span class="hide-menu">থানার দায়িত্বাভার ব্যক্তির তথ্য</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="show_word_rp_info"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('show_word_rp_info')}}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-file"></i>
-                                <span class="hide-menu">Add word R.P. Information</span>
+                                <span class="hide-menu">ওয়ার্ডের দায়িত্বাভার ব্যক্তির তথ্য</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="show_unit_rp_info"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{url('show_unit_rp_info')}}"
                                 aria-expanded="false">
                                 <i class="mdi mdi-alert-outline"></i>
-                                <span class="hide-menu">Add Unit RP Information</span>
+                                <span class="hide-menu">ইউনিটের দায়িত্বাভার ব্যক্তির তথ্য</span>
                             </a>
                         </li>
                     </ul>
@@ -226,6 +228,8 @@
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!--         -->
+
+
        @yield('content')
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -235,22 +239,38 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="{{asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <script src="{{asset('assets/extra-libs/sparkline/sparkline.js')}}"></script>
     <!--Wave Effects -->
-    <script src="dist/js/waves.js"></script>
+    <script src="{{asset('dist/js/waves.js')}}"></script>
     <!--Menu sidebar -->
-    <script src="dist/js/sidebarmenu.js"></script>
+    <script src="{{asset('dist/js/sidebarmenu.js')}}"></script>
     <!--Custom JavaScript -->
-    <script src="dist/js/custom.min.js"></script>
+    <script src="{{asset('dist/js/custom.min.js')}}"></script>
     <!--This page JavaScript -->
     <!--chartis chart-->
-    <script src="assets/libs/chartist/dist/chartist.min.js"></script>
-    <script src="assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="dist/js/pages/dashboards/dashboard1.js"></script>
+    <script src="{{asset('assets/libs/chartist/dist/chartist.min.js')}}"></script>
+    <script src="{{asset('assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
+    <script src="{{asset('dist/js/pages/dashboards/dashboard1.js')}}"></script>
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+
+    <script>
+        $(document).ready(function(){
+            $('#datatable').dataTable();
+            // $('#TableId').DataTable( "dom": '<"pull-left"f><"pull-right"l>tip' ); 
+        });
+
+$(document).ready(function () {
+
+          
+});
+    </script>
 
     @yield('javaScript')
 </body>

@@ -12,7 +12,9 @@ use App\Models\u_model;
 
 class u_controler extends Controller
 {
-    function show(){
+
+    function show()
+    {
         
         $data_p = parlament_seat::all();
        $data_join = DB::table('units')
@@ -27,7 +29,11 @@ class u_controler extends Controller
         return view('add_unit_info',compact('data_p','data_join'));
 
     }
-    function ajax($id){
+
+
+
+    function ajax($id)
+    {
        $data_join = DB::table('words')
                     ->join('police_stations','words.ps_id','=','police_stations.id')
                     ->select('words.id','words.w_number','police_stations.PS_name')
@@ -39,7 +45,11 @@ class u_controler extends Controller
         return response()->json($data_join);
 
     }
-    function insert(request $request){
+
+
+
+    function insert(request $request)
+    {
 
         $a = $request->p_id;
         $b = $request->ps_id;
@@ -72,86 +82,59 @@ class u_controler extends Controller
         }
         
 
-//         if(!empty($request->p_id) && !empty($request->ps_id) && !empty($request->d_id) && !empty($request->rp_name) && !empty($request->rp_phone) && !empty($request->rp_nid) && !empty($request->w_id))
-//         {
-//             $union_name = u_model::where('p_id', '=', $request->input('p_id'))->first();
-//             $ps_ids = u_model::where('ps_id', '=', $request->input('ps_id'))->first();
-//             $w_ids = u_model::where('w_id', '=', $request->input('w_id'))->first();
-
-
-
-//             if($ps_ids ===null){
-//          $insert = new u_model;
-
-//           $insert = new u_model;
-//         // $insert->p_id = $request->p_id;
-//         // $insert->ps_id= $request->ps_id;
-//         // $insert->w_id= $request->w_id;
-//         // $insert->union_name= $request->union_name;
-//         // $insert->save();
-//         // return redirect('/add_unit_info')->with('message', '1');
-//             }
-
-//             elseif ( $w_ids===null) { 
-//                 $insert = new u_model;
-//                 $insert->p_id = $request->p_id;
-//                 $insert->ps_id= $request->ps_id;
-//                 $insert->w_id= $request->w_id;
-//                 $insert->union_name= $request->union_name;
-//                 $insert->save();
-//                 return redirect('/add_unit_info')->with('message', '1');
-              
-//             }
-//             elseif ( $union_name===null) { 
-//                 $insert = new u_model;
-//         $insert->p_id = $request->p_id;
-//         $insert->ps_id= $request->ps_id;
-//         $insert->w_id= $request->w_id;
-//         $insert->union_name= $request->union_name;
-//         $insert->save();
-//         return redirect('/add_unit_info')->with('message', '1');
-    
-              
-//             }
-         
-          
-//             else{
-//                 echo "these value is exist";
-//                 return redirect('/show_word_rp_info')->with('message', '0');
-//             }
-
-
-//         }else{
-//         //    echo "empty all value";
-//             return redirect('/show_word_rp_info')->with('message', '2');
-//         }
-
-
-
-
-
-
-
-
-
-
-//         $user = u_model::where('union_name', '=', $request->input('union_name'))->first();
-
-//  if ($user ===null) { 
-    
-//         $insert = new u_model;
-//         $insert->p_id = $request->p_id;
-//         $insert->ps_id= $request->ps_id;
-//         $insert->w_id= $request->w_id;
-//         $insert->union_name= $request->union_name;
-//         $insert->save();
-//         return redirect('/add_unit_info')->with('message', '1');
-//         }else{
-//           $msg= 'This value is exist';
-//           return redirect('/add_unit_info')->with('message', '0');
-        
-//         }
-
-
     }
+
+
+
+
+    public function update_page($id){
+        
+        $data_p = parlament_seat::all();
+        $data_u = u_model::where ('id',$id)->first();
+        return view('update_unit_info',compact('data_p','data_u'));
+    }
+
+
+    
+
+
+
+
+    function update(request $request,$id)
+    {
+        
+         
+        $a = $request->p_id;
+        $b = $request->ps_id;
+        $c = $request->w_id;
+        $d = $request->union_name;
+        $combine = $a.$b.$c.$d;
+        $ps = u_model::all();
+        foreach($ps as $data){
+            $search='';
+            $com = $data->p_id.$data->ps_id.$data->w_id.$data->union_name;
+            if($combine==$com){
+                $search=$com;
+
+            }else{
+               
+                
+            }
+        }
+        if($search==$combine){
+            return redirect('/update_page_unit/'.$id)->with('message', '0');
+        }
+        else{
+            $insert = u_model::find($id);
+            $insert->p_id = $request->p_id;
+            $insert->ps_id= $request->ps_id;
+            $insert->w_id= $request->w_id;
+            $insert->union_name= $request->union_name;
+            $insert->save();
+            return redirect('/add_unit_info')->with('message', '5');
+        }
+        
+    }
+
+   
 }

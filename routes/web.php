@@ -27,21 +27,24 @@ Route::get('/', function () {
 Route::get('/add_parlament_info', [parlamentController::class,'show']);
 Route::post('/insert_parlament', [parlamentController::class,'insert']);
 Route::get('/parlament_update_page/{id}', [parlamentController::class,'update_page']);
-Route::get('/update_parlament/{id}', [parlamentController::class,'update']);
-Route::get('/delete_parlament/{id}', [parlamentController::class,'delete']);
+Route::put('/update_parlament/{id}', [parlamentController::class,'update']);
 
 
 Route::get('/Add_Police_Station', [PS_controler::class,'show']);
-Route::get('/insert_ps', [PS_controler::class,'insert']);
-Route::get('/ps_update_page/{id}', [PS_controler::class,'update_page']);
-// Route::get('/update_parlament/{id}', [PS_controler::class,'update']);
-// Route::get('/delete_parlament/{id}', [PS_controler::class,'delete']);
+Route::post('/insert_ps', [PS_controler::class,'insert']);
+Route::get('/update_page_ps/{id}', [PS_controler::class,'update_page']);
+Route::put('/update_ps/{id}', [PS_controler::class,'update']);
+
 
 Route::get('/add_word_info', [w_controler::class,'show']);
-Route::get('insert_word_info', [w_controler::class,'insert']);
+Route::post('insert_word_info', [w_controler::class,'insert']);
+Route::get('/update_page_word/{id}', [w_controler::class,'update_page']);
+Route::put('update_word_info/{id}', [w_controler::class,'update']);
 
 Route::get('/add_unit_info', [u_controler::class,'show']);
 Route::get('insert_unit_info', [u_controler::class,'insert']);
+Route::get('update_page_unit/{id}', [u_controler::class,'update_page']);
+Route::put('update_unit_info/{id}', [u_controler::class,'update']);
 
 
 Route::get('/ps_ajax/{id}', [w_controler::class,'ajax']);
@@ -54,13 +57,22 @@ Route::post('insert_designation_info', [designation_controler::class,'insert']);
 
 Route::get('/show_mp_info', [mp_controler::class,'show']);
 Route::post('/insert_mp_info', [mp_controler::class,'insert']);
+Route::get('/update_page_mp/{id}', [mp_controler::class,'update_page']);
+Route::put('/update_mp/{id}', [mp_controler::class,'update']);
 
 Route::get('/show_thana_rs_info', [secreatry_controler::class,'show']);
 Route::post('/insert_thana_rs_info', [secreatry_controler::class,'insert']);
+Route::get('/update_page_thana_rs/{id}', [secreatry_controler::class,'update_page']);
+Route::put('/update_thana_rs_info/{id}', [secreatry_controler::class,'update']);
 
 Route::get('/show_word_rp_info', [word_rp_controler::class,'show']);
 Route::post('/insert_word_rp_info', [word_rp_controler::class,'insert']);
+Route::get('/update_page_word_rp/{id}', [word_rp_controler::class,'update_page']);
+Route::put('/update_word_rp_info/{id}', [word_rp_controler::class,'update']);
 
 Route::get('/show_unit_rp_info', [unit_rp_controler::class,'show']);
 Route::post('/insert_unit_rp_info', [unit_rp_controler::class,'insert']);
+Route::get('/update_page_unit_rp/{id}', [unit_rp_controler::class,'update_page']);
+Route::put('/update_unit_rp_info/{id}', [unit_rp_controler::class,'update']);
+
 Route::delete('/delete/{model}/{id}', [unit_rp_controler::class,'deletes']);
