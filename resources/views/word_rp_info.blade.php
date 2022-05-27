@@ -9,7 +9,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-5 align-self-center">
-                    <h4 class="page-title">ওয়ার্ডের দায়িত্বাভার ব্যক্তির তথ্য</h4>
+                    <h6 class="title_page" class="page-title">ওয়ার্ডের দায়িত্বভার ব্যক্তির তথ্য যোগ করুন</h6>
                 </div>
                 @if(session()->has('message'))
                 @if(session()->get('message')=='0')
@@ -62,10 +62,10 @@
                             <form action="/insert_word_rp_info" method="POST" class="form-horizontal form-material mx-2" enctype="multipart/form-data">
                                @csrf
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">সংসদ নং</label>
+                                    <label class="col-sm-12" style="width: 25%;">আসন </label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="p_id" name="p_id" class="form-select shadow-none form-control-line" onchange="data_fetch()">
-                                            <option>সিলেক্ট সংসদ নং</option>
+                                            <option>সিলেক্ট আসন </option>
                                             @foreach($data_p as $value)
                                         <option value="{{$value->id}}">{{$value->name.'-'.$value->no}}</option>
                                         @endforeach
@@ -92,10 +92,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">কমিটি</label>
+                                    <label class="col-sm-12" style="width: 25%;">পদবি</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select name="d_id" class="form-select shadow-none form-control-line">
-                                            <option>সিলেক্ট কমিটি</option>
+                                            <option>সিলেক্ট পদবি</option>
                                             @foreach($data_designation as $value)
                                         <option value="{{$value->id}}">{{$value->d_name}}</option>
                                         @endforeach
@@ -146,7 +146,7 @@
                                 <div class="form-group d-flex">
                                     <div class="col-sm-12" style="width: 25%;"></div>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <button class="btn btn-success text-white">জমা দিন</button>
+                                        <button class="btn btn-success text-white">যোগ করুন </button>
                                     </div>
                                 </div>
                             </form>
@@ -156,24 +156,24 @@
            
                 <div class="row">
                     <!-- column -->
-                    <div class="col-12  w-75 m-auto">
+                    <div class="col-12  m-auto">
                         <div class="card">
                             <div class="table-responsive">
                                 <table id="datatable" class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0 text-center">সি. নং</th>
-                                            <th class="border-top-0 text-center">সংসদ নং</th>
+                                            <th class="border-top-0 text-center">আসন </th>
                                             <th class="border-top-0 text-center">থানা</th>
-                                            <th class="border-top-0 text-center">ওয়ার্ড নাম্বার</th>
-                                            <th class="border-top-0 text-center">কমিটির নাম</th>
+                                            <th class="border-top-0 text-center">ওয়ার্ড </th>
+                                            <th class="border-top-0 text-center">পদবি</th>
                                             <th class="border-top-0 text-center">নাম</th>
                                             <th class="border-top-0 text-center">মোবাইল নম্বর</th>
                                             <th class="border-top-0 text-center">ভোটার নং</th>
                                             <th class="border-top-0 text-center">ই-মেইল</th>
                                             <th class="border-top-0 text-center">জন্ম তারিখ</th>
                                             <th class="border-top-0 text-center">ছবি</th>
-                                            <th class="border-top-0 text-center">ওপারেশন</th>
+                                            <th class="border-top-0 text-center">অপারেশন</th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -11,7 +11,7 @@
       <div class="page-breadcrumb">
           <div class="row">
               <div class="col-5 align-self-center">
-                  <h4 class="page-title">কমিটি যোগ করুন</h4>
+                  <h4 class="title_page">পদবি যোগ করুন</h4>
               </div>
               @if(session()->has('message'))
               @if(session()->get('message')=='0')
@@ -43,7 +43,7 @@
                               <li class="breadcrumb-item">
                                   <a href="#">হোম</a>
                               </li>
-                              <li class="breadcrumb-item active" aria-current="page">কমিটি যোগ করুন
+                              <li class="breadcrumb-item active" aria-current="page">পদবি
                               </li>
                           </ol>
                       </nav>
@@ -69,12 +69,12 @@
                       <form action='insert_designation_info' method="POST" class="form-horizontal form-material mx-2">
                         @csrf
                       <div class="form-group d-flex">
-                              <label class="col-sm-12" style="width: 25%;">কমিটির নাম</label>
+                              <label class="col-sm-12" style="width: 25%;">পদবি</label>
                               <div class="col-sm-12" style="width: 75%;">
                                   <select name='d_name' class="form-select shadow-none form-control-line">
-                                      <option value="Presindent">কমিটির নাম সিলেক্ট করুন</option>  
-                                      <option value="প্রেসিডেন্ট">প্রেসিডেন্ট</option>  
-                                      <option value="সেক্রেটারি">সেক্রেটারি</option>  
+                                      <option value="Presindent">সিলেক্ট পদবি</option>  
+                                      <option value="সভাপতি">সভাপতি</option>  
+                                      <option value="সাধারণ সম্পাদক">সাধারণ সম্পাদক</option>  
                                   </select>
                               </div>
                           </div>
@@ -82,7 +82,7 @@
                           <div class="form-group d-flex">
                               <div class="col-sm-12" style="width: 25%;"></div>
                               <div class="col-sm-12" style="width: 75%;">
-                                  <button class="btn btn-success text-white">জমা দিন</button> 
+                                  <button class="btn btn-success text-white">যোগ করুন</button> 
                               </div>
                           </div>
                           
@@ -100,14 +100,14 @@
 
           <div class="row">
               <!-- column -->
-              <div class="col-12  w-75 m-auto">
+              <div class="col-12   m-auto">
                   <div class="card">
                       <div class="table-responsive">
                           <table class="table table-hover table-bordered">
                               <thead>
                                   <tr>
                                       <th class="border-top-0 text-center">সি. নং</th>
-                                      <th class="border-top-0 text-center">কমিটির নাম</th>
+                                      <th class="border-top-0 text-center">পদবি</th>
                                       {{-- <th class="border-top-0 text-center">ওপারেশন</th> --}}
                                   </tr>
                               </thead>
@@ -148,9 +148,9 @@
       <!-- footer -->
       <!-- ============================================================== -->
       <footer class="footer text-center">
-          All Rights Reserved by Nice admin. Designed and Developed by
-          <a href="https://www.wrappixel.com">WrapPixel</a>.
-      </footer>
+        All Rights Reserved by
+        <a href="#">ঢাকা মহানগর উত্তর আওয়ামী লীগ</a>.
+    </footer>
       <!-- ============================================================== -->
       <!-- End footer -->
       <!-- ============================================================== -->

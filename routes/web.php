@@ -10,6 +10,8 @@ use App\Http\Controllers\mp_controler;
 use App\Http\Controllers\secreatry_controler;
 use App\Http\Controllers\word_rp_controler;
 use App\Http\Controllers\unit_rp_controler;
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\displayInfo;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +24,19 @@ use App\Http\Controllers\unit_rp_controler;
 |
 */
 Route::get('/', function () {
-    return view('index');
+    return view('login');
 });
+
+Route::post('/login',[adminController::class,'login']);
+Route::post('/signup',[adminController::class,'signup']);
+Route::get('/logout',[adminController::class,'logout']);
+
+
+
+
+    
+Route::get('/dasboard', [adminController::class,'index']);
+
 Route::get('/add_parlament_info', [parlamentController::class,'show']);
 Route::post('/insert_parlament', [parlamentController::class,'insert']);
 Route::get('/parlament_update_page/{id}', [parlamentController::class,'update_page']);
@@ -76,3 +89,20 @@ Route::get('/update_page_unit_rp/{id}', [unit_rp_controler::class,'update_page']
 Route::put('/update_unit_rp_info/{id}', [unit_rp_controler::class,'update']);
 
 Route::delete('/delete/{model}/{id}', [unit_rp_controler::class,'deletes']);
+
+
+
+Route::get('/display_thana', [displayInfo::class,'thana']);
+Route::get('/thana_report', [displayInfo::class,'show_thana_report']);
+
+Route::get('/display_word', [displayInfo::class,'word']);
+Route::get('/word_report', [displayInfo::class,'show_word_report']);
+
+Route::get('/display_unit', [displayInfo::class,'unit']);
+Route::get('/unit_report', [displayInfo::class,'show_unit_report']);
+
+Route::get('/display_mp', [displayInfo::class,'mp']);
+Route::get('/mp_report', [displayInfo::class,'show_mp_report']);
+
+   
+ 

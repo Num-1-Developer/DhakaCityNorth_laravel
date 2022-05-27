@@ -10,7 +10,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title" style="text-align: center">থানা যোগ করুন</h4>
+                <h4 class="title_page" style="text-align: center">থানা যোগ করুন</h4>
             </div>
             @if(session()->has('message'))
             @if(session()->get('message')=='0')
@@ -63,10 +63,10 @@
                       @csrf
                       @method('put')
                     <div class="form-group d-flex">
-                            <label class="col-sm-12" style="width: 25%;">সংসদ নং</label>
+                            <label class="col-sm-12" style="width: 25%;">আসন </label>
                             <div class="col-sm-12" style="width: 75%;">
                                 <select name='P_id' class="form-select shadow-none form-control-line">
-                                    <option value="">সিলেক্ট সংসদ নং</option>
+                                    <option value="">সিলেক্ট আসন </option>
                                     @foreach($data_p as $data)
                                     <option value="{{$data->id}}">{{$data->name.'-'.$data->no}}</option>
                                     @endforeach   

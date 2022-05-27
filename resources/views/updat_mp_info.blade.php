@@ -10,7 +10,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">এম পি এর তথ্য যোগ করুন</h4>
+                <h4 class="title_page">এম পি এর তথ্য যোগ করুন</h4>
             </div>
             @if(session()->has('message'))
             @if(session()->get('message')=='0')
@@ -37,7 +37,7 @@
                             <li class="breadcrumb-item">
                                 <a href="#">হোম</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">এম.পি. এর তথ্য যোগ করুন</li>
+                            <li class="breadcrumb-item active" aria-current="page">এম.পি. এর তথ্য</li>
                         </ol>
                     </nav>
                 </div>
@@ -54,7 +54,7 @@
 
 
         <!-- ============================================================== -->
-        <!-- Add Police Station -->
+        <!-- Add Police Station --> 
         <div class="col-12  w-75 m-auto">
             <div class="card">
                 <div class="card-body">
@@ -63,10 +63,10 @@
                       @csrf
                       @method('put')
                     <div class="form-group d-flex">
-                            <label class="col-sm-12" style="width: 25%;">সংসদ নং</label>
+                            <label class="col-sm-12" style="width: 25%;">আসন কমিটি </label>
                             <div class="col-sm-12" style="width: 75%;">
                                 <select name='p_id' class="form-select shadow-none form-control-line">
-                                    <option value="">সিলেক্ট সংসদ নং</option>
+                                    <option value="">আসন কমিটি </option>
                                     @foreach($data_p as $data)
                                     <option value="{{$data->id}}">{{$data->name.'-'.$data->no}}</option>
                                     @endforeach   
@@ -110,7 +110,7 @@
                         <div class="form-group d-flex">
                             <label class="col-sm-12" style="width: 25%;">ছবি</label>
                             <div class="col-sm-12" style="width: 75%;">
-                                <input name='mp_img' type="file" placeholder="ছবি" class="form-control form-control-line" >
+                                <input name='mp_img' type="file" placeholder="ছবি" class="form-control form-control-line" value="{{asset("storage/image/$data->mp_img")}}">
                             </div>
                         </div>
                        

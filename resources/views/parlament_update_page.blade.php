@@ -7,7 +7,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">সংসদ নং</h4>
+                <h4 class="title_page">আসন</h4>
             </div>
             @if(session()->has('message'))
                 @if(session()->get('message')=='0')
@@ -39,7 +39,7 @@
                             <li class="breadcrumb-item">
                                 <a href="#">হোম</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">সংসদ নং</li>
+                            <li class="breadcrumb-item active" aria-current="page">আসন</li>
                         </ol>
                     </nav>
                 </div>
@@ -69,7 +69,7 @@
                                     <option value="ঢাকা">ঢাকা</option>
                                  </select>
                                 <!-- <input name='name' type="text" placeholder="Name" class="form-control form-control-line"> -->
-                                <input name='no' type="text" placeholder="সংসদ নং" class="form-control form-control-line" value="{{$data->no}}">
+                                <input name='no' type="text" placeholder="আসন" class="form-control form-control-line" value="{{$data->no}}">
                             </div>
                         </div>
                         <div class="form-group">

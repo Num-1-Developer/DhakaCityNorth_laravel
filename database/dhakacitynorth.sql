@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.3
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2022 at 12:54 PM
+-- Generation Time: May 23, 2022 at 08:45 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.5
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `dhakacitynorth`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_controls`
+--
+
+CREATE TABLE `admin_controls` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `phone_num` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admin_controls`
+--
+
+INSERT INTO `admin_controls` (`id`, `phone_num`, `password`, `created_at`, `updated_at`) VALUES
+(1, '01988406007', '1234', NULL, NULL),
+(2, '০১৯৮৮৪০৬০০৭', '১২৩৪', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -81,7 +103,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2022_05_14_115859_parlament_seat', 1),
 (6, '2022_05_14_121148_parlament', 2),
-(9, '2022_05_17_070746_create_designation_table', 3);
+(9, '2022_05_17_070746_create_designation_table', 3),
+(10, '2022_05_22_161254_create_admin_controls_table', 4);
 
 -- --------------------------------------------------------
 
@@ -376,6 +399,12 @@ INSERT INTO `word_rps` (`id`, `p_id`, `ps_id`, `w_id`, `d_id`, `rp_name`, `rp_ph
 --
 
 --
+-- Indexes for table `admin_controls`
+--
+ALTER TABLE `admin_controls`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `designation`
 --
 ALTER TABLE `designation`
@@ -468,6 +497,12 @@ ALTER TABLE `word_rps`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_controls`
+--
+ALTER TABLE `admin_controls`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `designation`
 --
 ALTER TABLE `designation`
@@ -483,7 +518,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `mp_details`

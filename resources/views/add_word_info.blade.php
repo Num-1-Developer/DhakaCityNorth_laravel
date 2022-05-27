@@ -9,7 +9,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-5 align-self-center">
-                    <h4 class="page-title">ওয়ার্ড যোগ করুন</h4>
+                    <h4 class="title_page">ওয়ার্ড কমিটি যোগ করুন</h4>
                 </div>
                 @if(session()->has('message'))
                 @if(session()->get('message')=='0')
@@ -41,7 +41,7 @@
                                 <li class="breadcrumb-item">
                                     <a href="#">হোম</a>
                                 </li>
-                                <li class="breadcrumb-item active" aria-current="page">ওয়ার্ড</li>
+                                <li class="breadcrumb-item active" aria-current="page">ওয়ার্ড কমিটি</li>
                             </ol>
                         </nav>
                     </div>
@@ -67,10 +67,10 @@
                             <form action='{{url("/insert_word_info")}}' method="POST" class="form-horizontal form-material mx-2">
                                 @csrf
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">সংসদ নং</label>
+                                    <label class="col-sm-12" style="width: 25%;">আসন</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="p_id" name="p_id" class="form-select shadow-none form-control-line" onchange="data_fetch()">
-                                            <option value="">সিলেক্ট সংসদ নং</option>
+                                            <option value="">আসন</option>
                                             @foreach($data_p as $value)
                                         <option value="{{$value->id}}">{{$value->name.'-'.$value->no}}</option>
                                         @endforeach
@@ -78,24 +78,24 @@
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">থানা</label>
+                                    <label class="col-sm-12" style="width: 25%;">থানা কমিটি</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="ps_id" name="ps_id" class="form-select shadow-none form-control-line" onchange="getid()">
-                                            <option value="">সিলেক্ট থানা</option>
+                                            <option value="">থানা কমিটি</option>
                                             
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;"> ওয়ার্ড নাম্বার</label>
+                                    <label class="col-sm-12" style="width: 25%;">ওয়ার্ড কমিটি</label>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <input name='w_number' type="text" placeholder="ওয়ার্ড নাম্বার" class="form-control form-control-line">
+                                        <input name='w_number' type="text" placeholder="ওয়ার্ড কমিটি" class="form-control form-control-line">
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
                                     <div class="col-sm-12" style="width: 25%;"></div>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <button class="btn btn-success text-white">জমা দিন</button>
+                                        <button class="btn btn-success text-white">যোগ করুন</button>
                                     </div>
                                 </div>
                             </form>
@@ -105,17 +105,17 @@
            
                 <div class="row">
                     <!-- column -->
-                    <div class="col-12  w-75 m-auto">
+                    <div class="col-12   m-auto">
                         <div class="card">
                             <div class="table-responsive">
                                 <table id="datatable" class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0 text-center">সি. নং</th>
-                                            <th class="border-top-0 text-center">সংসদ নং</th>
-                                            <th class="border-top-0 text-center">থানার নাম</th>
-                                            <th class="border-top-0 text-center">ওয়ার্ড নম্বর</th>
-                                            <th class="border-top-0 text-center">ওপারেশন</th>
+                                            <th class="border-top-0 text-center">আসন </th>
+                                            <th class="border-top-0 text-center">থানা কমিটি</th>
+                                            <th class="border-top-0 text-center">ওয়ার্ড কমিটি</th>
+                                            <th class="border-top-0 text-center">অপারেশন</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -152,8 +152,8 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer text-center">
-            All Rights Reserved by Nice admin. Designed and Developed by
-            <a href="https://www.wrappixel.com">WrapPixel</a>.
+            All Rights Reserved by
+            <a href="#">ঢাকা মহানগর উত্তর আওয়ামী লীগ</a>.
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->

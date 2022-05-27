@@ -8,11 +8,17 @@ use Illuminate\Support\Facades\DB;
 use App\Models\words;
 use App\Models\police_stations;
 use App\Models\parlament_seat;
+use Session;
+Session_start();
 
 class w_controler extends Controller
 {
     function show()
     {
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone)
+        {
         
         $data_p = parlament_seat::all();
 
@@ -20,11 +26,16 @@ class w_controler extends Controller
                     ->join('parlament_seat','words.P_id','=','parlament_seat.id')
                     ->join('police_stations','words.ps_id','=','police_stations.id')
                     ->select('words.*','police_stations.PS_name','parlament_seat.name','parlament_seat.no')
-                    ->orderBy('words.id','desc')
+                   
                     ->get();
                     // dd($data_p);
 
         return view('add_word_info',compact('data_p','data_join'));
+    }else{
+   
+
+        return redirect('/');
+        }  
 
     }
     function ajax($id)
@@ -33,7 +44,7 @@ class w_controler extends Controller
                     ->join('parlament_seat','police_stations.P_id','=','parlament_seat.id')
                     ->select('police_stations.id','police_stations.PS_name','parlament_seat.name','parlament_seat.no')
                     ->where('police_stations.P_id','=',$id)
-                    ->orderBy('police_stations.id','desc')
+                   
                     ->get();
                     // dd($data_p);
 
@@ -44,6 +55,10 @@ class w_controler extends Controller
 
     function insert(request $request)
     {
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone)
+        {
 
 
         $ps = words::where('ps_id', '=', $request->input('ps_id'))->first();
@@ -79,6 +94,12 @@ class w_controler extends Controller
             return redirect('/add_word_info')->with('message', '1');
         }
 
+    }else{
+   
+
+        return redirect('/');
+        }  
+
         
        
     }
@@ -87,17 +108,30 @@ class w_controler extends Controller
 
 
     public function update_page($id){
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone)
+        {
         
         $data_p = parlament_seat::all();
         $data_ps = police_stations::all();
         $data_w = words::where ('id',$id)->first();
         return view('update_word_info',compact('data_p','data_ps','data_w'));
+    }else{
+   
+
+        return redirect('/');
+        }  
     }
 
 
 
 
     function update(request $request,$id){
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone)
+        {
            $ps = words::where('ps_id', '=', $request->input('ps_id'))->first();
 
     
@@ -128,6 +162,11 @@ class w_controler extends Controller
             $insert->save();
             return redirect('/add_word_info')->with('message', '5');
         }
+    }else{
+   
+
+        return redirect('/');
+        }  
 
         
     }

@@ -11,12 +11,20 @@ use App\Models\parlament_seat;
 use App\Models\policeStationResponsibleParson;
 use App\Models\designation;
 use App\Models\word_rp;
+use Session;
+Session_start();
+
+
 
 class word_rp_controler extends Controller
 {
 
     function show()
     {
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone)
+        {
         
         $data_p = parlament_seat::all();
         $data_designation = designation::all();
@@ -27,9 +35,14 @@ class word_rp_controler extends Controller
                     ->join('words','word_rps.w_id','=','words.id')
                     ->join('designation','word_rps.d_id','=','designation.id')
                     ->select('word_rps.*','police_stations.PS_name','parlament_seat.name','parlament_seat.no','designation.d_name','words.w_number')
-                    ->orderBy('word_rps.id','desc')
+                   
                     ->get();
         return view('word_rp_info',compact('data_p','data_join','data_designation'));
+    }else{
+   
+
+        return redirect('/');
+        }  
 
     }
 
@@ -37,6 +50,10 @@ class word_rp_controler extends Controller
 
     function insert(request $request)
     {
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone)
+        {
 
         $a = $request->p_id;
         $b = $request->ps_id;
@@ -46,8 +63,9 @@ class word_rp_controler extends Controller
         $f = $request->rp_phone;
         $combine = $a.$b.$c.$d;
         $ps = word_rp::all();
+        $search='';
         foreach($ps as $data){
-            $search='';
+           
             $com = $data->p_id.$data->ps_id.$data->d_id.$data->w_id;
           
             
@@ -107,18 +125,34 @@ class word_rp_controler extends Controller
             }
             
         }
+    }else{
+   
+
+        return redirect('/');
+        }  
         
     }
 
 
 
-    public function update_page($id){
+    public function update_page($id)
+    {
+
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone)
+        {
         
         $data_p = parlament_seat::all();
         $data_designation = designation::all();
         $data_word_rp = word_rp::where ('id',$id)->first();
 
         return view('update_word_rp_info',compact('data_p','data_designation','data_word_rp'));
+    }else{
+   
+
+        return redirect('/');
+        }  
     }
 
 
@@ -127,6 +161,10 @@ class word_rp_controler extends Controller
 
     function update(request $request,$id)
     {
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone)
+        {
 
         $a = $request->p_id;
         $b = $request->ps_id;
@@ -199,9 +237,15 @@ class word_rp_controler extends Controller
                 return redirect('/show_word_rp_info')->with('message', '5');
             }
             
+            }
+        }else{
+    
+
+            return redirect('/');
+            }  
+            
         }
-        
+
     }
 
 
-}

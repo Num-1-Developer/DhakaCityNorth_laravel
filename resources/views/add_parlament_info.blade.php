@@ -11,7 +11,7 @@
       <div class="page-breadcrumb">
           <div class="row">
               <div class="col-5 align-self-center">
-                  <h4 class="page-title">সংসদ এলাকা যোগ করুন</h4>
+                  <h4  class="title_page">সংসদীয় এলাকা যোগ করুন</h4>
               </div>
             @if(session()->has('message'))
                 @if(session()->get('message')=='0')
@@ -43,7 +43,7 @@
                               <li class="breadcrumb-item">
                                   <a href="#">হোম</a>
                               </li>
-                              <li class="breadcrumb-item active" aria-current="page">সংসদ এলাকা</li>
+                              <li class="breadcrumb-item active" aria-current="page">আসন</li>
                           </ol>
                       </nav>
                   </div>
@@ -68,7 +68,7 @@
                         @csrf
                       <div class="form-group d-flex">
                         
-                              <label class="col-sm-12" style="width: 25%;">সংসদ এলাকা</label>
+                              <label class="col-sm-12" style="width: 25%;">আসন</label>
                               <div class="col-sm-12" style="width: 75%;">
                                   <select name='name' class="form-select shadow-none form-control-line">
                                       <option value="ঢাকা">ঢাকা</option>  
@@ -76,9 +76,9 @@
                               </div>
                           </div>
                           <div class="form-group d-flex">
-                              <label class="col-sm-12" style="width: 25%;"> সংসদ নং</label>
+                              <label class="col-sm-12" style="width: 25%;"> আসন নং</label>
                               <div class="col-sm-12" style="width: 75%;">
-                                  <input name='no' type="text" placeholder="সংসদ নং" class="form-control form-control-line">
+                                  <input name='no' type="text" placeholder="আসন নং" class="form-control form-control-line">
                               </div>
                           </div>
                          
@@ -103,14 +103,14 @@
 
           <div class="row">
               <!-- column -->
-              <div class="col-12  w-75 m-auto">
+              <div class="col-12   m-auto">
                   <div class="card">
                       <div class="table-responsive">
                           <table id="datatable" class="table table-hover table-bordered">
                               <thead>
                                   <tr>
                                       <th class="border-top-0 text-center">সি. নং</th>
-                                      <th class="border-top-0 text-center">সংসদ এলাকা</th>
+                                      <th class="border-top-0 text-center">আসন </th>
                                       <th class="border-top-0 text-center">অপারেশন</th>
                                   </tr>
                               </thead>
@@ -150,9 +150,9 @@
       <!-- footer -->
       <!-- ============================================================== -->
       <footer class="footer text-center">
-          All Rights Reserved by Nice admin. Designed and Developed by
-          <a href="https://www.wrappixel.com">WrapPixel</a>.
-      </footer>
+        All Rights Reserved by
+        <a href="#">ঢাকা মহানগর উত্তর আওয়ামী লীগ</a>.
+    </footer>
       <!-- ============================================================== -->
       <!-- End footer -->
       <!-- ============================================================== -->

@@ -10,7 +10,7 @@
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-5 align-self-center">
-                <h4 class="page-title">এম পি এর তথ্য যোগ করুন</h4>
+                <h4 class="title_page">এম পি এর তথ্য যোগ করুন</h4>
             </div>
             @if(session()->has('message'))
                 @if(session()->get('message')=='0')
@@ -42,7 +42,7 @@
                             <li class="breadcrumb-item">
                                 <a href="#">হোম</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">এম.পি. এর তথ্য যোগ করুন</li>
+                            <li class="breadcrumb-item active" aria-current="page">এম.পি. এর তথ্য</li>
                         </ol>
                     </nav>
                 </div>
@@ -67,10 +67,10 @@
                     <form action='insert_mp_info' method="POST" class="form-horizontal form-material mx-2" enctype="multipart/form-data">
                       @csrf
                     <div class="form-group d-flex">
-                            <label class="col-sm-12" style="width: 25%;">সংসদ নং</label>
+                            <label class="col-sm-12" style="width: 25%;">আসন</label>
                             <div class="col-sm-12" style="width: 75%;">
                                 <select name='p_id' class="form-select shadow-none form-control-line">
-                                    <option value="">সিলেক্ট সংসদ নং</option>
+                                    <option value="">সিলেক্ট আসন </option>
                                     @foreach($data_p as $data)
                                     <option value="{{$data->id}}">{{$data->name.'-'.$data->no}}</option>
                                     @endforeach   
@@ -126,7 +126,7 @@
                         <div class="form-group d-flex">
                             <div class="col-sm-12" style="width: 25%;"></div>
                             <div class="col-sm-12" style="width: 75%;">
-                                <button href='insert_ps' class="btn btn-success text-white">জমা দিন</button> 
+                                <button href='insert_ps' class="btn btn-success text-white">যোগ করুন </button> 
                             </div>
                         </div>
                     </form>
@@ -148,21 +148,21 @@
 ==================================================================================================== --}}
         <div class="row">
             <!-- column -->
-            <div class="col-12  w-75 m-auto">
+            <div class="col-12  m-auto">
                 <div class="card">
                     <div class="table-responsive">
                         <table id="datatable" class="table table-hover table-bordered">
                             <thead>
                                 <tr>
                                     <th class="border-top-0 text-center">সি. নং</th>
-                                    <th class="border-top-0 text-center">সংসদ নং</th>
+                                    <th class="border-top-0 text-center">আসন </th>
                                     <th class="border-top-0 text-center"> নাম</th>
                                     <th class="border-top-0 text-center"> ভোটার নং</th>
                                     <th class="border-top-0 text-center"> ফোন নাম্বার</th>
                                     <th class="border-top-0 text-center">ই-মেইল</th>
                                     <th class="border-top-0 text-center">জন্ম তারিখ</th>
                                     <th class="border-top-0 text-center">ছবি</th>
-                                    <th class="border-top-0 text-center">ওপারেশন</th>
+                                    <th class="border-top-0 text-center">অপারেশন</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -173,8 +173,8 @@
                                     </td>
                                     <td>{{$data->name.'-'.$data->no}}</td>
                                     <td >{{$data->mp_name}}</td>
-                                    <td type='tel' >{{$data->mp_phone}}</td>
-                                    <td >{{$data->mp_nid}}</td>
+                                    <td type='tel' >{{$data->mp_nid}}</td>
+                                    <td >{{$data->mp_phone}}</td>
                                     <td >{{$data->mp_email}}</td>
                                     <td >{{$data->mp_dob}}</td>
                                     <td class="td_n_img"><img class="img img-control" src="{{asset("storage/image/$data->mp_img")}}" alt=""></td>
@@ -215,8 +215,8 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer text-center">
-        All Rights Reserved by Nice admin. Designed and Developed by
-        <a href="https://www.wrappixel.com">WrapPixel</a>.
+        All Rights Reserved by
+        <a href="#">ঢাকা মহানগর উত্তর আওয়ামী লীগ</a>.
     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->

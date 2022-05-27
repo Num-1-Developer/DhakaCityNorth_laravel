@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\designation;
+use Session;
+Session_start();
 
 class designation_controler extends Controller
 {
@@ -14,7 +16,7 @@ class designation_controler extends Controller
         function show()
         {
         
-            $data_fetch = designation::orderBY('id','desc')->get();
+            $data_fetch = designation::all();
             return view('designation_info',['data'=>$data_fetch]);
         }
 

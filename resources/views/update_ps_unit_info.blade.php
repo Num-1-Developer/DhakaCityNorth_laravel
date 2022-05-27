@@ -9,7 +9,7 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-5 align-self-center">
-                    <h4 class="page-title">ইউনিটের দায়িত্বাভার ব্যক্তির তথ্য</h4>
+                    <h4 class="title_page">ইউনিটের দায়িত্বাভার ব্যক্তির তথ্য</h4>
                 </div>
                 @if(session()->has('message'))
                 @if(session()->get('message')=='0')
@@ -63,10 +63,10 @@
                                @csrf
                                @method('put')
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">সংসদ নং</label>
+                                    <label class="col-sm-12" style="width: 25%;">আসন </label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="p_id" name="p_id" class="form-select shadow-none form-control-line" onchange="data_fetch()">
-                                            <option value="">সিলেক্ট সংসদ নং</option>
+                                            <option value="{{$data_join->p_id}}">{{$data_join->name.'-'.$data_join->no}} </option>
                                             @foreach($data_p as $value)
                                         <option value="{{$value->id}}">{{$value->name.'-'.$value->no}}</option>
                                         @endforeach
@@ -77,7 +77,7 @@
                                     <label class="col-sm-12" style="width: 25%;"> থানা</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="ps_id" name="ps_id" class="form-select shadow-none form-control-line" onchange="ps_func()">
-                                            <option value="">সিলেক্ট থানা</option>
+                                            <option value="{{$data_join->ps_id}}">{{$data_join->PS_name}}</option>
                                             
                                         </select>
                                     </div>
@@ -87,7 +87,7 @@
                                     <label class="col-sm-12" style="width: 25%;"> ওয়ার্ড</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="w_id" name="w_id" class="form-select shadow-none form-control-line" onchange="union_fetch()">
-                                            <option value="">সিলেক্ট ওয়ার্ড</option>
+                                            <option value="{{$data_join->w_id}}">{{$data_join->w_number}}</option>
                                             
                                         </select>
                                     </div>
@@ -96,16 +96,16 @@
                                     <label class="col-sm-12" style="width: 25%;">ইউনিট</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select id="u_id" name="u_id" class="form-select shadow-none form-control-line">
-                                            <option value="">সিলেক্ট ইউনিট</option>
+                                            <option value="{{$data_join->u_id}}">{{$data_join->union_name}}</option>
                                             
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">কমিটি</label>
+                                    <label class="col-sm-12" style="width: 25%;">পদবি</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select name="d_id" class="form-select shadow-none form-control-line">
-                                            <option value="">সিলেক্ট কমিটি</option>
+                                            <option value="{{$data_join->d_id}}">{{$data_join->d_name}}</option>
                                             @foreach($data_designation as $value)
                                         <option value="{{$value->id}}">{{$value->d_name}}</option>
                                         @endforeach
@@ -122,7 +122,7 @@
                                 <div class="form-group d-flex">
                                     <label class="col-sm-12" style="width: 25%;">  মোবাইল নম্বর</label>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <input name='rp_phone' type="text" placeholder="মোবাইল নম্বর" class="form-control form-control-line" value="{{$data_unit_rp->rp_nid}}">
+                                        <input name='rp_phone' type="text" placeholder="মোবাইল নম্বর" class="form-control form-control-line" value="{{$data_unit_rp->rp_phone}}">
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
@@ -135,14 +135,14 @@
                                 <div class="form-group d-flex">
                                     <label class="col-sm-12" style="width: 25%;">ই-মেইল</label>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <input name='rp_email' type="email" placeholder="ই-মেইল" class="form-control form-control-line">
+                                        <input name='rp_email' type="email" placeholder="ই-মেইল" class="form-control form-control-line" value="{{$data_unit_rp->rp_email}}">
                                     </div>
                                 </div>
         
                                 <div class="form-group d-flex">
                                     <label class="col-sm-12" style="width: 25%;">জন্ম তারিখ</label>
                                     <div class="col-sm-12" style="width: 75%;">
-                                        <input name='rp_dob' type="date" lang="bn"  class="form-control form-control-line">
+                                        <input name='rp_dob' type="date" lang="bn"  class="form-control form-control-line" value="{{$data_unit_rp->rp_dob}}">
                                     </div>
                                 </div>
         

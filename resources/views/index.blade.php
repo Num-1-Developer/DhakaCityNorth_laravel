@@ -341,8 +341,8 @@
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer text-center">
-        All Rights Reserved by Nice admin. Designed and Developed by
-        <a href="https://www.wrappixel.com">WrapPixel</a>.
+        All Rights Reserved by
+        <a href="#">ঢাকা মহানগর উত্তর আওয়ামী লীগ</a>.
     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->

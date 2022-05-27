@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\parlament_seat;
 use App\Models\mpDetail;
 use Symfony\Contracts\Service\Attribute\Required;
+use Session;
+Session_start();
 
 class mp_controler extends Controller
 {
@@ -14,14 +16,22 @@ class mp_controler extends Controller
 
     function show()
     {
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone){
         
         $data_p = parlament_seat::all();
        $data_mp = DB::table('mp_details')
                     ->join('parlament_seat','mp_details.p_id','=','parlament_seat.id')
                     ->select('mp_details.*','parlament_seat.name','parlament_seat.no')
-                    ->orderBy('mp_details.id','desc')
+                  
                     ->get();
         return view('mp_info',compact('data_p','data_mp'));
+
+    }else{
+   
+        return redirect('/');
+        }   
 
     }
 
@@ -29,128 +39,129 @@ class mp_controler extends Controller
 
     function insert(request $request)
     {
+        $admin_phone = Session::get('admin_phone');
 
-        $a = $request->p_id;
-        // $b = $request->ps_id;
-        $c = $request->mp_nid;
-        $d = $request->mp_phone;
-        $combine = $c.$d;
-        $ps = mpDetail::all();
-        $search='';
-        foreach($ps as $data){
-           
-            $com = $data->p_id;
+        if($admin_phone){
 
-            if($a==$com){
-                $search=$com;
+            $user = mpDetail::where('p_id',$request->p_id)->first();
 
-            }
-        }
-        if($search==$a){
-            return redirect('/show_mp_info')->with('message', '0');
-        }
-        else{
-            $search='';
-            foreach($ps as $data){
+            if($user===null){
+                $a = $request->p_id;
+                // $b = $request->ps_id;
+                $c = $request->mp_nid;
+                $d = $request->mp_phone;
+                $combine = $c.$d;
+                $ps = mpDetail::all();
                 
-              
-                
-                if($data->mp_nid==$c ||$data->mp_phone ==$d ){
-                    $search=1;
+            
                   
-                }
+                   
+                        $insert = new mpDetail;
+        
+        
+                        if(empty($request->mp_nid)){
+                            $request->mp_nid="N/A";
+                        }
+                        if(empty($request->mp_phone)){
+                            $request->mp_phone="N/A";
+                        }
+        
+                        if(empty($request->mp_email)){
+                            $request->mp_email="N/A";
+                        }
+                        if(empty($request->mp_dob)){
+                            $request->mp_dob="N/A";
+                        }
+                        if(empty($request->mp_img)){
+                            $request->mp_img="null_img.png";
+                        }
+        
+        
+                        $insert->p_id = $request->p_id;
+                        
+                        $insert->mp_name= $request->mp_name;
+                        $insert->mp_email= $request->mp_email;
+                        $insert->mp_phone= $request->mp_phone;
+                        $insert->mp_nid= $request->mp_nid;
+                        $insert->mp_dob= $request->mp_dob;
+                        $insert->mp_img= $request->mp_img;
+        
+                        if($request->hasFile('mp_img')){
+                            $img = $request->File('mp_img');
+                            $img_name =time().'.'.$img->getClientOriginalExtension();
+                            $img->move('storage/image',$img_name);
+        
+                            $insert['mp_img']=$img_name;
+                          }
+                        $insert->save();
+                        return redirect('/show_mp_info')->with('message', '1');
 
-            }
-            if($search==1){
+            }else{
                 return redirect('/show_mp_info')->with('message', '0');
             }
-            else{
-                $insert = new mpDetail;
-                $insert->p_id = $request->p_id;
-                
-                $insert->mp_name= $request->mp_name;
-                $insert->mp_email= $request->mp_email;
-                $insert->mp_phone= $request->mp_phone;
-                $insert->mp_nid= $request->mp_nid;
-                $insert->mp_dob= $request->mp_dob;
 
-                if($request->hasFile('mp_img')){
-                    $img = $request->File('mp_img');
-                    $img_name =time().'.'.$img->getClientOriginalExtension();
-                    $img->move('storage/image',$img_name);
+     
+        
+    }else{
+   
 
-                    $insert['mp_img']=$img_name;
-                  }
-                $insert->save();
-                return redirect('/show_mp_info')->with('message', '1');
-            }
-            
-        }
+        return redirect('/');
+        }   
 
     }
 
 
 
     public function update_page($id){
+        $admin_phone = Session::get('admin_phone');
+
+        if($admin_phone){
         
         $data_p = parlament_seat::all();
         $data_mp = mpDetail::where ('id',$id)->first();
         return view('updat_mp_info',compact('data_p','data_mp'));
+    }else{
+   
+
+        return redirect('/');
+        }   
     }
 
 
 
     function update(request $request,$id)
     {
+        $admin_phone = Session::get('admin_phone');
 
-        $a = $request->p_id;
-        
-        $c = $request->mp_nid;
-        $d = $request->mp_phone;
-        $combine = $c.$d;
+        if($admin_phone)
+        {
+
+            $a = $request->p_id;
+            
+            $c = $request->mp_nid;
+            $d = $request->mp_phone;
+            $combine = $c.$d;
         $ps = mpDetail::all();
 
-        foreach($ps as $data){
-            $search='';
-            $com = $data->p_id;
-            if($a==$com){
-                $search=$com;
 
-            }else{
-               
-                
-            }
-        }
-        if($search==$a){
-            return redirect('/update_page_mp/'.$id)->with('message', '0');
-        }
-        else{
-            foreach($ps as $data){
-                $search='';
-              
-                $com = "0";
-                if($data->mp_nid==$c ||$data->mp_phone ==$d ){
-                    $search=$com;
-                  
-                }
-            }
-
-            if($search=='0'){
-                return redirect('/update_page_mp/'.$id)->with('message', '0');
-            }
-            else{
-
-                $request->validate([
-
-                    "p_id"=>'required',
-                    "mp_name"=>'required',
-
-                    "mp_phone"=>'required',
-
-                    "mp_nid"=>'required',
-                    "mp_img"=>'required|image|mimes:jpeg,png,jpg,gif,svg',
-                ]);
                 $update = mpDetail::find($id);
+
+                if(empty($request->mp_nid)){
+                    $request->mp_nid="N/A";
+                }
+                if(empty($request->mp_phone)){
+                    $request->mp_phone="N/A";
+                }
+
+                if(empty($request->mp_email)){
+                    $request->mp_email="N/A";
+                }
+                if(empty($request->mp_dob)){
+                    $request->mp_dob="N/A";
+                }
+                if(empty($request->mp_img)){
+                    $request->mp_img="null_img.png";
+                }
 
                 $update->p_id = $request->p_id;
                 $update->mp_name= $request->mp_name;
@@ -159,7 +170,8 @@ class mp_controler extends Controller
                 $update->mp_nid= $request->mp_nid;
 
                 $update->mp_dob= $request->mp_dob;
-                unlink("storage/image/$update->mp_img");
+                $update->mp_img= $request->mp_img;
+               
 
 
                 if($request->hasFile('mp_img')){
@@ -174,9 +186,14 @@ class mp_controler extends Controller
 
                 $update->save();
                 return redirect('/show_mp_info')->with('message', '5');
-            }
             
-        }
+            
+        
+    }else{
+   
+
+        return redirect('/');
+        }   
 
     }
 

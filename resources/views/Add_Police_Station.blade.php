@@ -10,7 +10,7 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-5 align-self-center">
-                        <h4 class="page-title">থানা যোগ করুন</h4>
+                        <h4 class="title_page">থানা যোগ করুন</h4>
                     </div>
                     @if(session()->has('message'))
                     @if(session()->get('message')=='0')
@@ -67,10 +67,10 @@
                             <form action='insert_ps' method="POST" class="form-horizontal form-material mx-2">
                               @csrf
                             <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">সংসদ নং</label>
+                                    <label class="col-sm-12" style="width: 25%;">সংসদ</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <select name='P_id' class="form-select shadow-none form-control-line">
-                                            <option value="">সিলেক্ট সংসদ নং</option>
+                                            <option value=""> আসন</option>
                                             @foreach($data_p as $data)
                                             <option value="{{$data->id}}">{{$data->name.'-'.$data->no}}</option>
                                             @endforeach   
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group d-flex">
-                                    <label class="col-sm-12" style="width: 25%;">থানার নাম</label>
+                                    <label class="col-sm-12" style="width: 25%;">থানা কমিটি</label>
                                     <div class="col-sm-12" style="width: 75%;">
                                         <input name='PS_name' type="text" placeholder="থানার নাম" class="form-control form-control-line">
                                     </div>
@@ -109,15 +109,15 @@
     ==================================================================================================== --}}
                 <div class="row">
                     <!-- column -->
-                    <div class="col-12  w-75 m-auto">
+                    <div class="col-12   m-auto">
                         <div class="card">
                             <div class="table-responsive">
                                 <table id="datatable" class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0 text-center">সি. নং</th>
-                                            <th class="border-top-0 text-center">সংসদ এলাকা</th>
-                                            <th class="border-top-0 text-center">থানার নাম</th>
+                                            <th class="border-top-0 text-center">আসন </th>
+                                            <th class="border-top-0 text-center">থানা কমিটি</th>
                                             <th class="border-top-0 text-center">অপারেশন</th>
                                         </tr>
                                     </thead>
@@ -165,8 +165,8 @@
             <!-- footer -->
             <!-- ============================================================== -->
             <footer class="footer text-center">
-                All Rights Reserved by Nice admin. Designed and Developed by
-                <a href="https://www.wrappixel.com">WrapPixel</a>.
+                All Rights Reserved by
+                <a href="#">ঢাকা মহানগর উত্তর আওয়ামী লীগ</a>.
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
